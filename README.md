@@ -1,4 +1,4 @@
-# create-dev-app
+# create-dedevs-app
 
 A CLI tool with starters to create a new dev app.
 
@@ -16,11 +16,11 @@ A CLI tool with starters to create a new dev app.
 ## Setup Instructions
 1. Clone the repository:
    ```bash
-   git clone https://github.com/DeDevsClub/create-dev-app.git
+   git clone https://github.com/DeDevsClub/create-dedevs-app.git
    ```
 2. Navigate to the project directory:
    ```bash
-   cd create-dev-app
+   cd create-dedevs-app
    ```
 3. Install dependencies:
    ```bash
@@ -38,7 +38,7 @@ node index.js
 ```
 You can also use the CLI command if installed globally:
 ```bash
-create-dev-app
+create-dedevs-app
 ```
 
 ## Architecture Overview

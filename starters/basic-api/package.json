@@ -9,7 +9,7 @@
   "author": "Buns <bunsthedev@gmail.com>",
   "license": "MIT",
   "generator": {
-    "name": "create-dev-app:basic-api",
+    "name": "create-dedevs-app:basic-api",
     "description": "Basic API using Express.js with TypeScript.",
     "version": "1.0.0"
   },

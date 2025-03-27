@@ -5,7 +5,7 @@
   "author": "Buns <bunsthedev@gmail.com>",
   "license": "MIT",
   "generator": {
-    "name": "create-dev-app:client-nextjs",
+    "name": "create-dedevs-app:client-nextjs",
     "description": "Next.js project bootstrapped with \"create-next-app\".",
     "version": "0.1.0"
   },

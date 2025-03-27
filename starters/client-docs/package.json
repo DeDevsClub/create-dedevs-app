@@ -9,7 +9,7 @@
   "author": "Buns <bunsthedev@gmail.com>",
   "license": "MIT",
   "generator": {
-    "name": "create-dev-app:client-docs",
+    "name": "create-dedevs-app:client-docs",
     "description": "Documentation website for a dev app.",
     "version": "0.0.1"
   },
