@@ -10,8 +10,10 @@
   "scripts": {
     "lint": "eslint .",
     "start": "node index.js",
-    "dev:docs": "cd apps/client-docs && yarn dev",
-    "dev:portfolio": "cd apps/client-portfolio && yarn dev"
+    "docs": "cd apps/docs && yarn dev",
+    "portfolio": "cd apps/portfolio && yarn dev",
+    "api": "cd apps/api && yarn dev",
+    "nextjs": "cd apps/nextjs && yarn dev"
   },
   "dependencies": {
     "@babel/core": "^7.26.10",
