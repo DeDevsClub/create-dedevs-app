@@ -50,7 +50,7 @@ inquirer.prompt(QUESTIONS).then(answers => {
   // const packageManager = answers['package-manager'];
   const installCommand = 'yarn'
   const doInstallCommand = `cd ${CURR_DIR}/${projectName} && ${installCommand}`;
-  const devCommand = 'yarn run dev'
+  const devCommand = 'yarn dev'
   const doDevCommand = `cd ${CURR_DIR}/${projectName} && ${devCommand}`;
 
   // Creates: project directory.
