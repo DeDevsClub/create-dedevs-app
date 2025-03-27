@@ -13,8 +13,8 @@ const CURR_DIR = process.cwd();
 // Gets: directory name of the current module.
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-// Lists: available starter templates from the 'starters' directory.
-const CHOICES = fs.readdirSync(`${__dirname}/starters`);
+// Lists: available starter templates from the 'apps' directory.
+const CHOICES = fs.readdirSync(`${__dirname}/apps`);
 
 // Defines: prompts for project creation.
 const QUESTIONS = [
@@ -34,23 +34,16 @@ const QUESTIONS = [
       else return 'Project name may only include letters, numbers, underscores and hashes.';
     },
   },
-  // {
-  //   name: 'package-manager',
-  //   type: 'list',
-  //   message: 'Select package manager:',
-  //   choices: ['npm', 'yarn', 'pnpm', 'bun'],
-  // },
 ];
 
 // Prompts: user for project creation.
 inquirer.prompt(QUESTIONS).then(answers => {
   const projectChoice = answers['project-choice'];
   const projectName = answers['project-name'];
-  const starterPath = `${__dirname}/starters/${projectChoice}`;
-  // const packageManager = answers['package-manager'];
+  const starterPath = `${__dirname}/apps/${projectChoice}`;
   const installCommand = 'yarn'
   const doInstallCommand = `cd ${CURR_DIR}/${projectName} && ${installCommand}`;
-  const devCommand = 'yarn dev'
+  const devCommand = 'yarn run dev'
   const doDevCommand = `cd ${CURR_DIR}/${projectName} && ${devCommand}`;
 
   // Creates: project directory.
@@ -65,9 +58,8 @@ inquirer.prompt(QUESTIONS).then(answers => {
   }
 
   // Runs: package manager in the project directory.
-  console.log(`\nRunning '${installCommand}' in the project directory...\n`);
-
   exec(doInstallCommand, (error, stdout, stderr) => {
+    console.log(`\nRunning '${installCommand}' in the project directory...\n`);
     if (error) {
       console.error(`Error: ${error.message}`);
       return;
@@ -79,8 +71,8 @@ inquirer.prompt(QUESTIONS).then(answers => {
     console.log(stdout);
     console.log(`\n \u2728 Project installed successfully <3\n`);
 
+    // Runs: development server in the project directory after installation completes.
     exec(doDevCommand, (error, stdout, stderr) => {
-      // Runs: development server in the project directory after installation completes.
       console.log(`\n \u2728 Running '${devCommand}' in the project directory...\n`);
       if (error) {
         console.error(`Error: ${error.message}`);

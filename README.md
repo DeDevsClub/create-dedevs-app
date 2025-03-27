@@ -1,6 +1,6 @@
 # create-dedevs-app
 
-A CLI tool with starters to create a new dev app.
+A CLI tool with starter [`apps`](./apps) to create a new dev app.
 
 # Instant Installation
 
@@ -45,7 +45,7 @@ create-dedevs-app
 
 ## Architecture Overview
 - **index.js**: Main entry point for the CLI tool, handles user prompts and project creation.
-- **starters/**: Contains starter templates for different types of projects.
+- **apps/**: Contains starter templates for different types of projects.
 - **package.json**: Contains project metadata and dependencies.
 
 ## Contribution Guidelines

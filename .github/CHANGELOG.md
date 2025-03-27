@@ -26,6 +26,6 @@
 - Fixed issue with undefined `answers` in the default project name logic in [index.js](cci:7://file:///Users/buns/Documents/GitHub/DeDevsClub/create-dedevs-app/index.js:0:0-0:0).
 
 ### Removed
-- Deleted unnecessary files in `starters/basic-api` directory.
+- Deleted unnecessary (i.e. all) filesin `examples` directory.
 
 ## [v0.1.0] - Initial release

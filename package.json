@@ -6,11 +6,12 @@
   "author": "Buns <bunsthedev@gmail.com>",
   "license": "MIT",
   "type": "module",
-  "description": "CLI tool with starters to create a new dev app.",
+  "description": "CLI tool with apps to create a new dev app.",
   "scripts": {
     "lint": "eslint .",
     "start": "node index.js",
-    "dev:docs": "cd examples/dedevs-docs && yarn dev"
+    "dev:docs": "cd apps/client-docs && yarn dev",
+    "dev:portfolio": "cd apps/client-portfolio && yarn dev"
   },
   "dependencies": {
     "@babel/core": "^7.26.10",
