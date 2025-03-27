@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import React, { useEffect, useState } from "react"
 import { HashnodePost } from "@/lib/hashnode"
 import { gql } from "graphql-request"
-import { MarkdownRenderer } from "@/components/markdown-renderer"
+import { EnhancedMarkdownRenderer } from "@/components/enhanced-markdown-renderer"
 
 // Replace with your Hashnode username
 const HASHNODE_USERNAME = "0xbuns";
@@ -84,7 +84,7 @@ export default function BlogPostPage() {
           slug: slug,
           title: fetchedPost.title || 'Untitled Post',
           brief: fetchedPost.brief || '',
-          content: fetchedPost.content?.html || '',
+          content: fetchedPost.content?.markdown || '',
           dateAdded: fetchedPost.dateAdded || new Date().toISOString(),
           coverImage: fetchedPost.coverImage || '',
           totalReactions: 0,
@@ -174,7 +174,11 @@ export default function BlogPostPage() {
         )}
 
         {/* Article content with optimized typography */}
-        <MarkdownRenderer content={post.content} />
+        <EnhancedMarkdownRenderer 
+          content={post.content} 
+          extractToc={true}
+          showToc={true}
+        />
 
       </article>
 

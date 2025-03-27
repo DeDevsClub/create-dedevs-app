@@ -19,7 +19,7 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: "Portfolio | Developer & Designer",
+  title: "Portfolio | DeDevs",
   description: "A modern portfolio showcasing development and design work",
   generator: 'create-dedevs-app'
 }
