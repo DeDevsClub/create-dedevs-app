@@ -1,6 +1,6 @@
 {
   "name": "create-dev-app",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "main": "index.js",
   "repository": "https://github.com/DeDevsClub/create-dev-app.git",
   "author": "Buns <bunsthedev@gmail.com>",
@@ -9,9 +9,7 @@
   "description": "CLI tool with starters to create a new dev app.",
   "scripts": {
     "lint": "eslint .",
-    "start": "node index.js",
-    "test": "echo \"No tests available.\" && exit 1",
-    "prepublishOnly": "npm run build"
+    "start": "node index.js"
   },
   "dependencies": {
     "@babel/core": "^7.26.10",

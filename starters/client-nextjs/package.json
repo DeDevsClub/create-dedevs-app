@@ -2,6 +2,13 @@
   "name": "nextjs",
   "version": "0.1.0",
   "private": true,
+  "author": "Buns <bunsthedev@gmail.com>",
+  "license": "MIT",
+  "generator": {
+    "name": "create-dev-app:client-nextjs",
+    "description": "Next.js project bootstrapped with \"create-next-app\".",
+    "version": "0.1.0"
+  },
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
