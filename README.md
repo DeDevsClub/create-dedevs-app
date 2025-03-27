@@ -30,17 +30,13 @@ sudo npm install -g create-dedevs-app
    ```
 3. Install dependencies:
    ```bash
-   yarn install
-   ```
-   or
-   ```bash
-   npm install
+   yarn
    ```
 
 ## Usage Examples
 To create a new project, run the following command and follow the prompts:
 ```bash
-node index.js
+yarn start
 ```
 You can also use the CLI command if installed globally:
 ```bash
