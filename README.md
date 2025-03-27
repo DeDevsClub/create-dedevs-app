@@ -2,6 +2,12 @@
 
 A CLI tool with starters to create a new dev app.
 
+# Instant Installation
+
+```bash
+sudo npm install -g create-dedevs-app
+```
+
 ## Table of Contents
 - [System Requirements](#system-requirements)
 - [Setup Instructions](#setup-instructions)
