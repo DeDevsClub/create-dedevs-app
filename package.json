@@ -1,6 +1,6 @@
 {
   "name": "create-dedevs-app",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "index.js",
   "repository": "https://github.com/DeDevsClub/create-dedevs-app.git",
   "author": "Buns <bunsthedev@gmail.com>",
