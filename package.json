@@ -10,10 +10,13 @@
   "scripts": {
     "lint": "eslint .",
     "start": "node index.js",
-    "docs": "cd apps/docs && yarn dev",
-    "portfolio": "cd apps/portfolio && yarn dev",
-    "api": "cd apps/api && yarn dev",
-    "nextjs": "cd apps/nextjs && yarn dev"
+    "apps:install": "make install",
+    "apps:build": "make build",
+    "apps:dev": "make dev",
+    "docs": "make docs",
+    "portfolio": "make portfolio",
+    "api": "make api",
+    "nextjs": "make nextjs"
   },
   "dependencies": {
     "@babel/core": "^7.26.10",
@@ -22,6 +25,11 @@
   },
   "bin": {
     "create-dedevs-app": "index.js"
+  },
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "next": "15.2.4"
   },
   "devDependencies": {
     "@eslint/js": "^9.23.0",

@@ -16,7 +16,7 @@ sudo npm install -g create-dedevs-app
 - [Contribution Guidelines](#contribution-guidelines)
 
 ## System Requirements
-- Node.js v14 or later
+- Node.js v22 or later
 - npm or yarn package manager
 
 ## Setup Instructions
@@ -28,9 +28,20 @@ sudo npm install -g create-dedevs-app
    ```bash
    cd create-dedevs-app
    ```
-3. Install dependencies:
+3. Install dependencies (*for all apps*):
+
    ```bash
-   yarn
+   yarn apps:install
+   ```
+
+4. Build all apps:
+   ```bash
+   yarn apps:build
+   ```
+
+5. Start all apps:
+   ```bash
+   yarn apps:dev
    ```
 
 ## Usage Examples

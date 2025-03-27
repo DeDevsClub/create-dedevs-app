@@ -1,5 +1,17 @@
 # Changelog
 
+## [v0.1.3] - 2025-03-27
+
+### Added
+- Added `PORT` environment variable to `dev` scripts in `apps/api`, `apps/nextjs`, and `apps/portfolio` to specify different ports.
+
+### Changed
+- Updated `Makefile` to run apps in parallel using `&`.
+- Updated README to reflect new commands for installing, building, and starting apps.
+
+### Fixed
+- Resolved issues with Tailwind CSS configuration by upgrading to the latest version.
+
 ## [v0.1.2] - 2025-03-27
 
 ### Changed

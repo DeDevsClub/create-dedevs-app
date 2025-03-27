@@ -1,5 +1,5 @@
 {
-  "name": "dev-docs",
+  "name": "docs",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,9 +9,9 @@
   "author": "Buns <bunsthedev@gmail.com>",
   "license": "MIT",
   "generator": {
-    "name": "create-dedevs-app:client-docs",
+    "name": "create-dedevs-app:docs",
     "description": "Documentation website for a dev app.",
-    "version": "0.0.1"
+    "version": "0.1.0"
   },
   "devDependencies": {
     "typescript": "^5.8.2"

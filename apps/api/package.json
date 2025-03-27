@@ -1,26 +1,26 @@
 {
-  "name": "basic-api",
+  "name": "api",
   "version": "0.1.0",
   "description": "Basic API using Express.js with TypeScript.",
   "main": "index",
   "scripts": {
-    "dev": "ts-node index"
+    "dev": "PORT=3002 ts-node index"
   },
   "author": "Buns <bunsthedev@gmail.com>",
   "license": "MIT",
   "generator": {
-    "name": "create-dedevs-app:basic-api",
+    "name": "create-dedevs-app:api",
     "description": "Basic API using Express.js with TypeScript.",
-    "version": "1.0.0"
+    "version": "0.1.0"
   },
   "dependencies": {
     "dotenv": "^16.4.7",
-    "express": "^4.18.2",
+    "express": "^4.21.2",
     "typescript": "^5.8.2"
   },
   "devDependencies": {
     "@types/express": "^5.0.1",
-    "@types/node": "^22.13.14",
-    "ts-node": "^10.9.2"
+    "@types/node": "^22",
+    "ts-node": "^10"
   }
 }
