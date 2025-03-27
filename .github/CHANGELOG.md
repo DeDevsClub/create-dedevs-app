@@ -1,5 +1,16 @@
 # Changelog
 
+## [v0.1.2] - 2025-03-27
+
+### Changed
+- Updated `devCommand` to use `yarn dev` instead of `yarn run dev` in [index.js](cci:7://file:///Users/buns/Documents/GitHub/DeDevsClub/create-dedevs-app/index.js:0:0-0:0).
+
+### Added
+- Added `dev:docs` script to `package.json` for easier documentation development.
+
+### Fixed
+- Resolved `EAGAIN` error by adjusting the command execution in [index.js](cci:7://file:///Users/buns/Documents/GitHub/DeDevsClub/create-dedevs-app/index.js:0:0-0:0).
+
 ## [v0.1.1] - 2025-03-27
 
 ### Added
