@@ -26,11 +26,6 @@
   "bin": {
     "create-dedevs-app": "index.js"
   },
-  "dependencies": {
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "next": "15.2.4"
-  },
   "devDependencies": {
     "@eslint/js": "^9.23.0",
     "@types/json5": "^0.0.29",
@@ -49,11 +44,7 @@
       "prettier"
     ],
     "rules": {
-      "prettier/prettier": "error",
-      "@typescript-eslint/no-unused-vars": "off",
-      "@typescript-eslint/no-explicit-any": "off",
-      "@typescript-eslint/no-unsafe-function-type": "off",
-      "@typescript-eslint/no-require-imports": "off"
+      "prettier/prettier": "error"
     }
   }
 }

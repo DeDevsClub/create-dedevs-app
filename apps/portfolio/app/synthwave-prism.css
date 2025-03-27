@@ -1,0 +1,168 @@
+/* Synthwave-inspired Prism.js theme */
+
+.synthwave-code-block {
+    position: relative;
+    font-family: var(--font-mono,
+            ui-monospace,
+            SFMono-Regular,
+            Menlo,
+            Monaco,
+            Consolas,
+            "Liberation Mono",
+            "Courier New",
+            monospace);
+}
+
+/* Grid background effect */
+.synthwave-grid {
+  background-image: 
+    linear-gradient(to right, rgba(255, 0, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 0, 255, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Glow effects */
+.synthwave-glow {
+  text-shadow: 0 0 4px #fc28a8;
+}
+
+.synthwave-glow-cyan {
+  text-shadow: 0 0 4px #0ff, 0 0 10px #0ff;
+}
+
+.synthwave-glow-pink {
+  filter: drop-shadow(0 0 5px rgba(255, 105, 180, 0.7));
+}
+
+/* Code block styles */
+.synthwave-code-block code[class*="language-"],
+.synthwave-code-block pre[class*="language-"] {
+  color: #f4f4f8;
+  text-shadow: 0 0 2px #100c0f, 0 0 5px #dc078e33, 0 0 10px #fff3;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  tab-size: 2;
+  hyphens: none;
+}
+
+/* Code blocks */
+.synthwave-code-block pre[class*="language-"] {
+    overflow: auto;
+    border-radius: calc(var(--radius) - 2px);
+}
+
+/* Inline code */
+.synthwave-code-block :not(pre)>code[class*="language-"] {
+    padding: 0.1em 0.3em;
+    border-radius: 0.3em;
+    white-space: normal;
+}
+
+/* Token colors */
+
+/* Numbers and booleans */
+.synthwave-code-block .token.number,
+.synthwave-code-block .token.boolean {
+  color: #f97e72;
+  text-shadow: 0 0 2px #100c0f, 0 0 10px #257c5575, 0 0 35px #21272475;
+}
+
+/* Strings */
+.synthwave-code-block .token.string,
+.synthwave-code-block .token.char,
+.synthwave-code-block .token.attr-value {
+  color: #ffcc66;
+  text-shadow: 0 0 2px #100c0f, 0 0 3px #ffcc6655, 0 0 5px #ffcc6655;
+}
+
+/* Keywords */
+.synthwave-code-block .token.keyword {
+  color: #f92aad;
+  text-shadow: 0 0 2px #100c0f, 0 0 10px #f92aad55, 0 0 35px #f92aad55;
+  font-style: italic;
+}
+
+/* Functions and methods */
+.synthwave-code-block .token.function {
+  color: #62f4fa;
+  text-shadow: 0 0 2px #100c0f, 0 0 10px #62f4fa55, 0 0 35px #62f4fa55;
+}
+
+/* Property names */
+.synthwave-code-block .token.property {
+  color: #96cbfe;
+  text-shadow: 0 0 2px #100c0f, 0 0 5px #96cbfe55;
+}
+
+/* Class names, types */
+.synthwave-code-block .token.class-name,
+.synthwave-code-block .token.builtin {
+  color: #a9a1ff;
+  text-shadow: 0 0 2px #100c0f, 0 0 10px #a9a1ff55, 0 0 35px #a9a1ff55;
+}
+
+/* Variables */
+.synthwave-code-block .token.variable {
+  color: #7fdbca;
+  text-shadow: 0 0 2px #100c0f, 0 0 5px #7fdbca55;
+}
+
+/* Comments */
+.synthwave-code-block .token.comment,
+.synthwave-code-block .token.prolog,
+.synthwave-code-block .token.doctype,
+.synthwave-code-block .token.cdata {
+  color: #6b7c85;
+  font-style: italic;
+}
+
+/* Tags, selectors */
+.synthwave-code-block .token.tag,
+.synthwave-code-block .token.selector {
+  color: #ff9d00;
+  text-shadow: 0 0 2px #100c0f, 0 0 5px #ff9d0055;
+}
+
+/* Operators */
+.synthwave-code-block .token.operator,
+.synthwave-code-block .token.punctuation {
+  color: #c792ea;
+}
+
+/* Attributes */
+.synthwave-code-block .token.attr-name {
+  color: #ffcb6b;
+}
+
+/* Important/bold text */
+.synthwave-code-block .token.important,
+.synthwave-code-block .token.bold {
+  font-weight: bold;
+}
+
+/* Italic text */
+.synthwave-code-block .token.italic {
+  font-style: italic;
+}
+
+/* Entity like &amp; */
+.synthwave-code-block .token.entity {
+  cursor: help;
+}
+
+/* Line highlighting */
+.synthwave-code-block .highlight-line {
+    background-color: rgba(255, 126, 219, 0.1);
+    display: block;
+    margin-right: -1em;
+    margin-left: -1em;
+    padding-right: 1em;
+    padding-left: 0.75em;
+    border-left: 0.25em solid #ff7edb;
+}
