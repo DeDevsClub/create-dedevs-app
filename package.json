@@ -12,25 +12,33 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "inquirer": "^12.5.0"
+    "inquirer": "^12.5.0",
+    "typescript": "^5.8.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.23.0",
+    "@types/json5": "^0.0.29",
     "eslint": "^9.23.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^10.1.1",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-prettier": "^5.2.5",
-    "@types/json5": "^0.0.29",
     "globals": "^16.0.0",
-    "typescript-eslint": "^8.28.0",
-    "prettier": "^3.5.3"
+    "prettier": "^3.5.3",
+    "typescript-eslint": "^8.28.0"
   },
   "eslintConfig": {
     "extends": "eslint:recommended",
-    "plugins": ["prettier"],
+    "plugins": [
+      "@typescript-eslint",
+      "prettier"
+    ],
     "rules": {
-      "prettier/prettier": "error"
+      "prettier/prettier": "error",
+      "@typescript-eslint/no-unused-vars": "off",
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/no-unsafe-function-type": "off",
+      "@typescript-eslint/no-require-imports": "off"
     }
   }
 }
