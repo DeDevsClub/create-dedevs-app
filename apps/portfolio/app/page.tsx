@@ -10,9 +10,21 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 
+type BlogCardProps = {
+  brief: string
+  id: string
+  slug: string
+  title: string
+  coverImage?: string
+  date?: string
+  readingTime?: string
+  excerpt?: string
+  url: string
+}
+
 export default function Home() {
   const [introComplete, setIntroComplete] = useState(false)
-
+  
   const featuredProjects = [
     {
       id: "neural-network",
@@ -37,14 +49,15 @@ export default function Home() {
     },
   ]
 
-  const latestPosts = [
-    {
-      id: "future-of-ai",
-      title: "The Future of AI Development",
-      excerpt: "Exploring the ethical implications and technological advancements in artificial intelligence.",
-      date: "2023-05-15",
-      readingTime: "5 min read",
-    },
+  const latestPosts: BlogCardProps[] = [
+ 
+    { 
+      brief: "This guide walks you through Mastra's components, showing how to quickly spin-up fully-functional agents — loaded with customizable tools and a modular workflow. You will learn how to launch a local dashboard, which includes an agent playground, Mast...",
+      id: "67d55a65c66ec85d129f8865",
+      slug: "mastra-ai-framework",
+      title: "Mastra AI: Typescript Agent Framework",
+      url: "https://blog.dedevs.club/mastra-ai-framework"
+    }
   ]
 
   const skills = ["JavaScript", "TypeScript", "React", "Next.js", "Node.js", "Python", "TensorFlow", "AWS"]

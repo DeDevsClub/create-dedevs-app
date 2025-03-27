@@ -3,17 +3,27 @@ import { CalendarIcon, Clock } from "lucide-react"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 
 interface BlogCardProps {
-  id: string
   title: string
-  excerpt: string
-  date: string
-  readingTime: string
+  slug: string
+  coverImage?: string
+  date?: string
+  readingTime?: string
+  excerpt?: string
 }
 
-export function BlogCard({ id, title, excerpt, date, readingTime }: BlogCardProps) {
+export function BlogCard({ title, slug, coverImage, date, readingTime, excerpt }: BlogCardProps) {
   return (
-    <Link href={`/blog/${id}`}>
-      <Card className="card-hover h-full flex flex-col">
+    <Link href={`/blog/${slug}`}>
+      <Card className="card-hover h-full flex flex-col overflow-hidden">
+        {coverImage && (
+          <div className="h-48 overflow-hidden">
+            <img 
+              src={coverImage} 
+              alt={title}
+              className="w-full object-cover h-full transition-transform duration-500 hover:scale-105"
+            />
+          </div>
+        )}
         <CardHeader className="pb-2">
           <h3 className="text-lg font-semibold tracking-tight">{title}</h3>
           <div className="flex items-center gap-4 text-xs text-muted-foreground">
@@ -34,4 +44,3 @@ export function BlogCard({ id, title, excerpt, date, readingTime }: BlogCardProp
     </Link>
   )
 }
-
