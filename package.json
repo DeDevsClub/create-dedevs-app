@@ -1,19 +1,25 @@
 {
-  "name": "create-dev-project",
-  "version": "1.0.1",
+  "name": "create-dev-app",
+  "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/DeDevsClub/create-dev-project.git",
+  "repository": "https://github.com/DeDevsClub/create-dev-app.git",
   "author": "Buns <bunsthedev@gmail.com>",
   "license": "MIT",
   "type": "module",
-  "description": "CLI tool with starters to create a new dev project.",
+  "description": "CLI tool with starters to create a new dev app.",
   "scripts": {
     "lint": "eslint .",
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "echo \"No tests available.\" && exit 1",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
+    "@babel/core": "^7.26.10",
     "inquirer": "^12.5.0",
     "typescript": "^5.8.2"
+  },
+  "bin": {
+    "create-dev-app": "index.js"
   },
   "devDependencies": {
     "@eslint/js": "^9.23.0",
