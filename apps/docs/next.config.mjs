@@ -11,11 +11,8 @@ const nextConfig = {
         {
           loader: '@mdx-js/loader',
           options: {
-            remarkPlugins: [require('remark-gfm')],
-            rehypePlugins: [
-              require('rehype-slug'),
-              require('rehype-autolink-headings'),
-            ],
+            remarkPlugins: ['remark-gfm'],
+            rehypePlugins: ['rehype-slug', 'rehype-autolink-headings'],
           },
         },
       ],
