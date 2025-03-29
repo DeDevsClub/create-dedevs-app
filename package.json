@@ -16,7 +16,8 @@
     "docs": "make docs",
     "portfolio": "make portfolio",
     "api": "make api",
-    "nextjs": "make nextjs"
+    "nextjs": "make nextjs",
+    "themer": "make themer"
   },
   "dependencies": {
     "@babel/core": "^7.26.10",

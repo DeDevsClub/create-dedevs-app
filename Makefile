@@ -1,18 +1,21 @@
 install:
-	cd apps/api && yarn install
-	cd apps/docs && yarn install
-	cd apps/portfolio && yarn install
-	cd apps/nextjs && yarn install
+	cd apps/api && yarn &
+	cd apps/docs && yarn &
+	cd apps/portfolio && yarn &
+	cd apps/nextjs && yarn &
+	cd apps/themer && yarn &
 
 build:
 	cd apps/portfolio && yarn build &
-	cd apps/nextjs && yarn build
+	cd apps/nextjs && yarn build &
+	cd apps/themer && yarn build
 
 dev:
 	cd apps/api && yarn dev &
 	cd apps/docs && yarn dev &
 	cd apps/portfolio && yarn dev &
-	cd apps/nextjs && yarn dev
+	cd apps/nextjs && yarn dev &
+	cd apps/themer && yarn dev
 
 api:
 	cd apps/api && yarn dev
@@ -25,3 +28,6 @@ nextjs:
 
 portfolio:
 	cd apps/portfolio && yarn dev
+
+themer:
+	cd apps/themer && yarn dev
