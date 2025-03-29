@@ -1,32 +1,75 @@
-# DevDocs Starter Kit
+# Next.js Documentation App
 
-The starter kit contains examples including
+This documentation app is built with Next.js and supports MDX content. The app provides:
 
-- Guide pages
-- Navigation
-- Customizations
+- Guide pages with MDX support
+- Navigation with sidebar
+- Dark/light mode support
 - API Reference pages
-- Use of popular components
+- Custom MDX components
 
-### Development
-
-Install the [Mintlify CLI](https://www.npmjs.com/package/mintlify) to preview the documentation changes locally. To install, use the following command
+## Directory Structure
 
 ```
-sudo npm i -g mintlify
+docs/
+├── app/                    # Next.js app directory
+│   ├── docs/               # Docs layout and pages
+│   │   └── layout.tsx      # Layout for docs section with sidebar
+│   ├── globals.css         # Global styles
+│   ├── layout.tsx          # Root layout
+│   └── page.tsx            # Homepage
+├── components/             # React components
+│   ├── mdx-content.tsx     # MDX rendering component
+│   └── sidebar-nav.tsx     # Sidebar navigation
+├── lib/                    # Utility functions
+│   └── mdx.ts              # MDX processing utilities
+├── public/                 # Static assets
+│   ├── images/             # Images used in docs
+│   ├── logo/               # Logo files
+│   └── favicon.svg         # Site favicon
+├── essentials/             # MDX content for essentials section
+├── api-reference/          # MDX content for API reference
+├── next.config.mjs         # Next.js configuration
+├── package.json            # Project dependencies
+├── postcss.config.mjs      # PostCSS configuration
+└── tailwind.config.ts      # Tailwind CSS configuration
 ```
 
-Run the following command at the root of your documentation (where docs.json is)
+## Development
 
+To run the documentation site locally:
+
+1. Install dependencies:
+
+```bash
+pnpm install
 ```
-mintlify dev
+
+2. Start the development server:
+
+```bash
+pnpm run dev
 ```
 
-### Publishing Changes
+The site will be available at http://localhost:3004
 
-Install our Github App to auto propagate changes from your repo to your deployment. Changes will be deployed to production automatically after pushing to the default branch. Find the link to install on your dashboard. 
+## Building for Production
 
-#### Troubleshooting
-- Ensure you have the Mintlify CLI installed via `sudo npm i -g mintlify`
-- Mintlify dev isn't running - Run `mintlify install` it'll re-install dependencies.
-- Page loads as a 404 - Make sure you are running in a folder with `docs.json`
+To build the documentation for production:
+
+```bash
+pnpm run build
+```
+
+To preview the production build:
+
+```bash
+pnpm run start
+```
+
+## Customization
+
+- Edit `app/layout.tsx` to update the site header and footer
+- Update `app/docs/layout.tsx` to modify the sidebar navigation
+- Style changes can be made in `app/globals.css` and `tailwind.config.ts`
+- MDX components can be customized in `components/mdx-content.tsx`

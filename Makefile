@@ -1,6 +1,6 @@
 install:
 	cd apps/api && yarn &
-	cd apps/docs && yarn &
+	cd apps/docs && pnpm i &
 	cd apps/portfolio && yarn &
 	cd apps/nextjs && yarn &
 	cd apps/themer && yarn &
@@ -23,7 +23,7 @@ clean:
 
 dev:
 	cd apps/api && yarn dev &
-	cd apps/docs && yarn dev &
+	cd apps/docs && pnpm run dev &
 	cd apps/hashnode/packages/starters/hashnode && pnpm run dev &
 	cd apps/portfolio && yarn dev &
 	cd apps/nextjs && yarn dev &
@@ -33,7 +33,7 @@ api:
 	cd apps/api && yarn dev
 
 docs:
-	cd apps/docs && yarn dev
+	cd apps/docs && pnpm run dev
 
 hashnode:
 	cd apps/hashnode/packages/starters/hashnode && pnpm run dev
