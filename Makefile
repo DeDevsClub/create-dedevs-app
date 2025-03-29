@@ -12,6 +12,15 @@ build:
 	cd apps/themer && yarn build &
 	cd apps/hashnode/packages/starters/hashnode && pnpm run build &
 
+clean:
+	rm -rf node_modules
+	rm -rf apps/api/node_modules
+	rm -rf apps/docs/node_modules
+	rm -rf apps/hashnode/packages/starters/hashnode/node_modules
+	rm -rf apps/portfolio/node_modules
+	rm -rf apps/nextjs/node_modules
+	rm -rf apps/themer/node_modules
+
 dev:
 	cd apps/api && yarn dev &
 	cd apps/docs && yarn dev &

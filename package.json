@@ -6,17 +6,20 @@
   "author": "Buns <bunsthedev@gmail.com>",
   "license": "MIT",
   "type": "module",
-  "description": "CLI tool with apps to create a new dev app.",
+  "description": "CLI tool with apps to create a new dedevs app.",
   "scripts": {
     "lint": "eslint .",
     "start": "node index.js",
+
     "apps:install": "make install",
     "apps:build": "make build",
     "apps:dev": "make dev",
-    "docs": "make docs",
-    "portfolio": "make portfolio",
+
     "api": "make api",
+    "docs": "make docs",
+    "hashnode": "make hashnode",
     "nextjs": "make nextjs",
+    "portfolio": "make portfolio",
     "themer": "make themer"
   },
   "dependencies": {
