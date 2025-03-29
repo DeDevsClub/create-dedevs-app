@@ -26,9 +26,9 @@ module.exports = {
 			typography: () => ({
 				DEFAULT: {
 					css: {
-						color: '#111',
+						color: '#fafafa',
 						a: {
-							color: '#111',
+							color: '#fafafa',
 							'&.user-mention': {
 								textDecoration: 'none',
 								color: '#2962ff',
