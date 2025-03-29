@@ -14,7 +14,30 @@ export const metadata: Metadata = {
   title: "DeDevs | Themer",
   generator: 'create-dedevs-app',
   description: "Generate beautiful color palettes for your Tailwind CSS projects",
-}
+  keywords: ['DeDevs', 'Tailwind CSS', 'color palettes'],
+  openGraph: {
+    title: "DeDevs | Themer",
+    description: "Generate beautiful color palettes for your Tailwind CSS projects",
+    type: 'website',
+    url: 'https://themer.dedevs.club',
+    siteName: 'DeDevs | Themer',
+  },
+  twitter: {
+    title: "DeDevs | Themer",
+    description: "Generate beautiful color palettes for your Tailwind CSS projects",
+    card: 'summary_large_image',
+    site: 'https://themer.dedevs.club',
+  },
+  icons: {
+    icon: '/favicon.svg',
+  },
+  themeColor: '#F300A8',
+  colorScheme: 'dark',
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+  },
+};
 
 export default function RootLayout({
   children,
