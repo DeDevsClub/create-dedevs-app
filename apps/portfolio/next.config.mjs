@@ -40,6 +40,31 @@ const nextConfig = {
         hostname: 'media.graphassets.com',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'logo-marque.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn.dribbble.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'upload.wikimedia.org',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.01net.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'encrypted-tbn0.gstatic.com',
+        pathname: '/**',
+      },
     ],
   },
   experimental: {

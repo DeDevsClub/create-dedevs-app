@@ -1,6 +1,11 @@
-import { cn } from "@/utils/cn";
+import { cn } from "@/lib/utils";
 
-export function ModernCard() {
+interface ModernCardProps {
+  title: string;
+  description: string;
+}
+
+export function ModernCard({ title, description }: ModernCardProps) {
   return (
     <div
       className={cn(
@@ -11,14 +16,13 @@ export function ModernCard() {
       )}
     >
       <div className="-rotate-6 h-40 translate-y-12 text-center font-bold text-neutral-500 text-neutral-500/20 text-xl tracking-tighter ">
-        To replace with some content
+        {title}
       </div>
       <h6 className="mb-2 origin-left transform-gpu font-semibold text-gray-600 text-xl tracking-tighter transition-all group-hover:scale-90 dark:text-gray-300">
-        Damn good card
+        {title}
       </h6>
       <p className=" text-sm tracking-tight dark:text-gray-400">
-        This card is better in dark mode. It has a nice inner shadow and a nice
-        border. It's a good modern card.
+        {description}
       </p>
     </div>
   );
