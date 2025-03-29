@@ -11,9 +11,9 @@ const inconsolata = Inconsolata({
 })
 
 export const metadata: Metadata = {
-  title: "Tailwind Color Palette Generator",
+  title: "DeDevs | Themer",
+  generator: 'create-dedevs-app',
   description: "Generate beautiful color palettes for your Tailwind CSS projects",
-    generator: 'v0.dev'
 }
 
 export default function RootLayout({

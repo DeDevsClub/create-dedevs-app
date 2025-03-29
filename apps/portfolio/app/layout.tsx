@@ -19,9 +19,29 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: "Portfolio | DeDevs",
-  description: "A modern portfolio showcasing development and design work",
-  generator: 'create-dedevs-app'
+    title: "@0xBuns | Portfolio",
+    generator: 'create-dedevs-app',
+    description: "A modern portfolio showcasing development and design work",
+    keywords: ["portfolio", "development", "design", "DeDevs", "0xBuns"],
+    openGraph: {
+      title: "@0xBuns | Portfolio",
+      description: "A modern portfolio showcasing development and design work",
+      type: "website",
+      locale: "en",
+      siteName: "@0xBuns",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "@0xBuns | Portfolio",
+      description: "A modern portfolio showcasing development and design work",
+      site: "@0xBuns",
+    },
+    icons: {
+      icon: "/favicon.ico",
+    },
+    themeColor: "#ff00ff",
+    colorScheme: "dark",
+    manifest: "/site.webmanifest",
 }
 
 export default function RootLayout({
