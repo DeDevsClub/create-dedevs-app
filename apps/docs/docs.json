@@ -7,7 +7,6 @@
     "light": "#F300A8",
     "dark": "#F300A8"
   },
-  "favicon": "/favicon.svg",
   "navigation": {
     "tabs": [
       {
@@ -75,8 +74,8 @@
     }
   },
   "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "light": "https://dedevs.club/favicon.ico",
+    "dark": "https://dedevs.club/favicon.ico"
   },
   "navbar": {
     "links": [

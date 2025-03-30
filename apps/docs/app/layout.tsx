@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     site: 'DeDevs | Docs',
   },
   icons: {
-    icon: '/favicon.svg',
+    icon: 'https://dedevs.club/favicon.ico',
   },
 };
 
@@ -37,7 +37,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="icon" href="/favicon.svg" />
+        <link rel="icon" href="https://dedevs.club/favicon.ico" />
       </head>
       <body className={inter.className}>
         <ThemeProvider defaultTheme="system">

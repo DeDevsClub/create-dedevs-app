@@ -21,11 +21,20 @@ export async function generateStaticParams() {
 export async function generateMetadata({ 
   params 
 }: {
-  params: Promise<{ slug: string[] }>
+  params: { slug: string[] } | Promise<{ slug: string[] }>
 } & any) {
-  // Await params since it's now a Promise in Next.js 15.2.4
-  const resolvedParams = await params;
+  // In Next.js 15.2.4, params might be a promise that needs to be awaited
+  const resolvedParams = await Promise.resolve(params);
   const { slug } = resolvedParams;
+  
+  // Skip metadata generation for static files
+  if (slug.length === 1 && isStaticFile(slug[0])) {
+    return {
+      title: 'Static Asset',
+      description: 'Static asset file'
+    };
+  }
+  
   const docPath = getDocPath(slug);
   
   try {
@@ -43,11 +52,22 @@ export async function generateMetadata({
 }
 
 function getDocPath(slug: string[]): string {
-  if (slug.length === 1) {
-    return `${slug[0]}.mdx`;
-  } else {
-    return `${slug.join('/')}.mdx`;
+  // Don't add .mdx extension for static files
+  const path = slug.length === 1 ? slug[0] : slug.join('/');
+  
+  // Check if the path already has a file extension (like .svg, .png, etc.)
+  if (isStaticFile(path)) {
+    return path;
   }
+  
+  // For regular content paths, add .mdx extension
+  return `${path}.mdx`;
+}
+
+// Helper function to check if a path is a static file
+function isStaticFile(path: string): boolean {
+  const staticExtensions = ['.svg', '.png', '.jpg', '.jpeg', '.gif', '.ico', '.css', '.js'];
+  return staticExtensions.some(ext => path.endsWith(ext));
 }
 
 interface MdxSource {
@@ -63,8 +83,8 @@ async function getMdxBySlug(docPath: string): Promise<MdxSource> {
       throw new Error(`File not found: ${fullPath}`);
     }
     
-    // Only try to parse MDX files
-    if (!fullPath.endsWith('.mdx')) {
+    // Skip processing for non-MDX files
+    if (!docPath.endsWith('.mdx')) {
       throw new Error(`Not an MDX file: ${fullPath}`);
     }
     
@@ -95,22 +115,21 @@ async function getMdxBySlug(docPath: string): Promise<MdxSource> {
 export default async function DocPage({ 
   params 
 }: {
-  params: Promise<{ slug: string[] }>
+  params: { slug: string[] } | Promise<{ slug: string[] }>
   searchParams?: Record<string, string | string[] | undefined>
 } & any) {
-  // Await params since it's now a Promise in Next.js 15.2.4
-  const resolvedParams = await params;
+  // In Next.js 15.2.4, params might be a promise that needs to be awaited
+  const resolvedParams = await Promise.resolve(params);
   const { slug } = resolvedParams;
-
-  // Check if the slug looks like a static asset or non-MDX file
-  if (slug.length === 1 && (
-    slug[0].includes('.svg') || 
-    slug[0].includes('.png') || 
-    slug[0].includes('.jpg') || 
-    slug[0].includes('.ico')
-  )) {
+  
+  // Get the full path - we'll check if it's a static file or content
+  const path = slug.length === 1 ? slug[0] : slug.join('/');
+  
+  // For static files, redirect to the correct static file path
+  if (isStaticFile(path)) {
+    // Return 404 - the static file should be served by Next.js static file handling
     notFound();
-    return;
+    return null;
   }
   
   const docPath = getDocPath(slug);
