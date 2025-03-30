@@ -1,15 +1,13 @@
 install:
-	cd apps/api && yarn &
+	cd apps/api && pnpm i &
 	cd apps/docs && pnpm i &
-	cd apps/portfolio && yarn &
-	cd apps/nextjs && yarn &
-	cd apps/themer && yarn &
+	cd apps/portfolio && pnpm i &
+	cd apps/nextjs && pnpm i &
 	cd apps/hashnode/packages/starters/hashnode && pnpm i &
 
 build:
-	cd apps/portfolio && yarn build &
-	cd apps/nextjs && yarn build &
-	cd apps/themer && yarn build &
+	cd apps/portfolio && pnpm run build &
+	cd apps/nextjs && pnpm run build &
 	cd apps/hashnode/packages/starters/hashnode && pnpm run build &
 
 clean:
@@ -19,18 +17,16 @@ clean:
 	rm -rf apps/hashnode/packages/starters/hashnode/node_modules
 	rm -rf apps/portfolio/node_modules
 	rm -rf apps/nextjs/node_modules
-	rm -rf apps/themer/node_modules
 
 dev:
-	cd apps/api && yarn dev &
+	cd apps/api && pnpm run dev &
 	cd apps/docs && pnpm run dev &
 	cd apps/hashnode/packages/starters/hashnode && pnpm run dev &
-	cd apps/portfolio && yarn dev &
-	cd apps/nextjs && yarn dev &
-	cd apps/themer && yarn dev
+	cd apps/portfolio && pnpm run dev &
+	cd apps/nextjs && pnpm run dev &
 
 api:
-	cd apps/api && yarn dev
+	cd apps/api && pnpm run dev
 
 docs:
 	cd apps/docs && pnpm run dev
@@ -39,10 +35,7 @@ hashnode:
 	cd apps/hashnode/packages/starters/hashnode && pnpm run dev
 
 nextjs:
-	cd apps/nextjs && yarn dev
+	cd apps/nextjs && pnpm run dev
 
 portfolio:
-	cd apps/portfolio && yarn dev
-
-themer:
-	cd apps/themer && yarn dev
+	cd apps/portfolio && pnpm run dev

@@ -19,8 +19,7 @@
     "docs": "make docs",
     "hashnode": "make hashnode",
     "nextjs": "make nextjs",
-    "portfolio": "make portfolio",
-    "themer": "make themer"
+    "portfolio": "make portfolio"
   },
   "dependencies": {
     "@babel/core": "^7.26.10",

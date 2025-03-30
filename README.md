@@ -17,7 +17,7 @@ sudo npm install -g create-dedevs-app
 
 ## System Requirements
 - Node.js v22 or later
-- npm or yarn package manager
+- pnpm
 
 ## Setup Instructions
 1. Clone the repository:
@@ -31,23 +31,23 @@ sudo npm install -g create-dedevs-app
 3. Install dependencies (*for all apps*):
 
    ```bash
-   yarn apps:install
+   pnpm apps:install
    ```
 
 4. Build all apps:
    ```bash
-   yarn apps:build
+   pnpm apps:build
    ```
 
 5. Start all apps:
    ```bash
-   yarn apps:dev
+   pnpm apps:dev
    ```
 
 ## Usage Examples
 To create a new project, run the following command and follow the prompts:
 ```bash
-yarn start
+pnpm start
 ```
 You can also use the CLI command if installed globally:
 ```bash
