@@ -1,3 +1,5 @@
+'use client';
+
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import Link from 'next/link';
 import Image from 'next/image';

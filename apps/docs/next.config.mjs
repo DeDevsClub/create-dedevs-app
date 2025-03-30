@@ -2,6 +2,10 @@
 const nextConfig = {
   reactStrictMode: true,
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
+  // Disable static generation to avoid React hooks issues during SSG
+  output: 'standalone',
+  // Mark next-mdx-remote as external package to handle it properly
+  serverExternalPackages: ['next-mdx-remote'],
   // Configure webpack to handle MDX files
   webpack: (config) => {
     // Add MDX file support

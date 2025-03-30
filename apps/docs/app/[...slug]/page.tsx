@@ -8,35 +8,21 @@ import { MdxContent } from '@/components/mdx-content';
 import { notFound } from 'next/navigation';
 import { FrontMatter, parseMdxFile } from '@/lib/mdx';
 
-interface PageProps {
-  params: {
-    slug: string[];
-  };
-  searchParams?: Record<string, string | string[] | undefined>;
-}
+// Force dynamic rendering to avoid React hooks issues during static generation
+export const dynamic = 'force-dynamic';
 
 // Generate static params for all MDX files
 export async function generateStaticParams() {
-  // This is a placeholder - in production, you'd build this dynamically
-  // from all your MDX files
-  return [
-    { slug: ['introduction'] },
-    { slug: ['quickstart'] },
-    { slug: ['development'] },
-    { slug: ['essentials', 'markdown'] },
-    { slug: ['essentials', 'code'] },
-    { slug: ['essentials', 'images'] },
-    { slug: ['essentials', 'settings'] },
-    { slug: ['essentials', 'navigation'] },
-    { slug: ['essentials', 'reusable-snippets'] },
-    { slug: ['api-reference', 'introduction'] },
-    { slug: ['api-reference', 'endpoint', 'get'] },
-    { slug: ['api-reference', 'endpoint', 'create'] },
-    { slug: ['api-reference', 'endpoint', 'delete'] },
-  ];
+  // Return empty array to disable static generation for these pages
+  // This is needed because next-mdx-remote uses React hooks which can't be used during SSG
+  return [];
 }
 
-export async function generateMetadata({ params }: PageProps) {
+export async function generateMetadata({ 
+  params 
+}: {
+  params: { slug: string[] }
+} & any) {
   const { slug } = params;
   const docPath = getDocPath(slug);
   
@@ -99,7 +85,12 @@ async function getMdxBySlug(docPath: string): Promise<MdxSource> {
   }
 }
 
-export default async function DocPage({ params }: PageProps) {
+export default async function DocPage({ 
+  params 
+}: {
+  params: { slug: string[] }
+  searchParams?: Record<string, string | string[] | undefined>
+} & any) {
   const { slug } = params;
   const docPath = getDocPath(slug);
   
