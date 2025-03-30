@@ -12,6 +12,7 @@ interface PageProps {
   params: {
     slug: string[];
   };
+  searchParams?: Record<string, string | string[] | undefined>;
 }
 
 // Generate static params for all MDX files

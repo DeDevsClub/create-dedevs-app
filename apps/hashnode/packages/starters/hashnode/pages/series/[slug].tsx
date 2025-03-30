@@ -2,6 +2,7 @@ import { resizeImage } from '@starter-kit/utils/image';
 import { GetServerSideProps } from 'next';
 import { WithUrqlProps, initUrqlClient } from 'next-urql';
 import Head from 'next/head';
+import Image from 'next/image';
 import { useState } from 'react';
 import { twJoin } from 'tailwind-merge';
 import { useQuery } from 'urql';
@@ -116,10 +117,13 @@ export default function Series({
 
 						{posts.length === 0 && publication.isTeam ? (
 							<div className="mb-6 flex w-full flex-col items-center rounded border-2 border-dashed p-6 dark:border-slate-800">
-								<img
+								<Image
 									className="mb-5 block w-56"
 									alt="No posts"
 									src="https://cdn.hashnode.com/res/hashnode/image/upload/v1584017401345/LrrwlBZC0.png"
+									width={224}
+									height={168}
+									priority
 								/>
 								<p className="text-2xl font-bold leading-snug tracking-tight text-slate-700 dark:text-slate-400">
 									No posts yet

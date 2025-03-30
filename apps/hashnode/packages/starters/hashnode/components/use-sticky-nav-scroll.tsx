@@ -101,7 +101,7 @@ const useStickyScroll = ({ elRef }: Props) => {
 	useEffect(() => {
 		if (!elRef.current) return;
 		setElement(elRef.current);
-	}, []);
+	}, [elRef, setElement]);
 
 	useEffect(() => {
 		if (shouldAddScroll) {
@@ -114,22 +114,24 @@ const useStickyScroll = ({ elRef }: Props) => {
 		// eslint-disable-next-line consistent-return
 		return () => {
 			window.removeEventListener('scroll', handleNavScroll);
-			if (scrollRef.current.animation) cancelAnimationFrame(scrollRef.current.animation);
+			const animation = scrollRef.current.animation;
+			if (animation) cancelAnimationFrame(animation);
 		};
-	}, [shouldAddScroll]);
+	}, [shouldAddScroll, elRef, handleNavScroll]);
+
+	const handleResize = useRef(debounce(() => {
+		setShouldAddScroll(window.innerWidth >= 768);
+	}, 300));
 
 	useEffect(() => {
-		const handleResize = debounce(() => {
-			setShouldAddScroll(window.innerWidth >= 768);
-		}, 300);
-		handleResize();
-		window.addEventListener('resize', handleResize);
+		handleResize.current();
+		window.addEventListener('resize', handleResize.current);
 
 		// eslint-disable-next-line consistent-return
 		return () => {
-			window.removeEventListener('resize', handleResize);
+			window.removeEventListener('resize', handleResize.current);
 		};
-	}, []);
+	}, [setShouldAddScroll]);
 };
 
 export default useStickyScroll;
