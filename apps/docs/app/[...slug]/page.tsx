@@ -21,9 +21,11 @@ export async function generateStaticParams() {
 export async function generateMetadata({ 
   params 
 }: {
-  params: { slug: string[] }
+  params: Promise<{ slug: string[] }>
 } & any) {
-  const { slug } = params;
+  // Await params since it's now a Promise in Next.js 15.2.4
+  const resolvedParams = await params;
+  const { slug } = resolvedParams;
   const docPath = getDocPath(slug);
   
   try {
@@ -61,6 +63,11 @@ async function getMdxBySlug(docPath: string): Promise<MdxSource> {
       throw new Error(`File not found: ${fullPath}`);
     }
     
+    // Only try to parse MDX files
+    if (!fullPath.endsWith('.mdx')) {
+      throw new Error(`Not an MDX file: ${fullPath}`);
+    }
+    
     const doc = parseMdxFile(docPath);
     
     if (!doc) {
@@ -88,10 +95,24 @@ async function getMdxBySlug(docPath: string): Promise<MdxSource> {
 export default async function DocPage({ 
   params 
 }: {
-  params: { slug: string[] }
+  params: Promise<{ slug: string[] }>
   searchParams?: Record<string, string | string[] | undefined>
 } & any) {
-  const { slug } = params;
+  // Await params since it's now a Promise in Next.js 15.2.4
+  const resolvedParams = await params;
+  const { slug } = resolvedParams;
+
+  // Check if the slug looks like a static asset or non-MDX file
+  if (slug.length === 1 && (
+    slug[0].includes('.svg') || 
+    slug[0].includes('.png') || 
+    slug[0].includes('.jpg') || 
+    slug[0].includes('.ico')
+  )) {
+    notFound();
+    return;
+  }
+  
   const docPath = getDocPath(slug);
   
   try {

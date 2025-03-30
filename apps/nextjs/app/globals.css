@@ -51,38 +51,38 @@ body {
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
   .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
+    --background: 230 25% 8%; /* Deep blue-gray background */
+    --foreground: 210 40% 98%;
+    --card: 232 27% 10%;
+    --card-foreground: 210 40% 98%;
+    --popover: 232 27% 10%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 328 100% 54%; /* Vibrant pink - DeDevs signature color */
+    --primary-foreground: 210 40% 98%;
+    --secondary: 232 23% 18%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 232 23% 13%;
+    --muted-foreground: 217 24% 63%;
+    --accent: 328 70% 49%; /* Slightly darker accent pink */
+    --accent-foreground: 210 40% 98%;
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 232 23% 15%;
+    --input: 232 23% 15%;
+    --ring: 328 100% 54%; /* Pink ring */
+    --chart-1: 328 100% 54%; /* Pink */
+    --chart-2: 262 83% 58%; /* Purple */
+    --chart-3: 199 89% 48%; /* Cyan */
+    --chart-4: 130 50% 60%; /* Green */
+    --chart-5: 43 96% 58%; /* Yellow-Orange */
+    --sidebar-background: 230 30% 10%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 328 100% 54%; /* Pink */
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-accent: 232 23% 18%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 232 23% 20%;
+    --sidebar-ring: 328 100% 54%; /* Pink */
   }
 }
 
