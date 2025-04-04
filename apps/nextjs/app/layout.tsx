@@ -14,28 +14,46 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const defaultUrl = `https://nextjs.dedevs.club`
+
 export const metadata: Metadata = {
+  metadataBase: new URL(defaultUrl),
   title: "DeDevs | NextJS App",
-  generator: 'create-dedevs-app',
-  description: "Build Your Next App (+ shadcn/ui) in seconds, not hours.",
-  keywords: ['DeDevs', 'NextJS', 'shadcn/ui', 'landing'],
-  openGraph: {
-    title: "DeDevs | NextJS App",
-    description: "Build Next App (+ shadcn/ui) in seconds, not hours.",
-    type: 'website',
-    url: 'https://nextjs.dedevs.club',
-    siteName: 'DeDevs | NextJS + shadcn/ui',
+  description:
+    "Build Your Next App (+ shadcn/ui) in seconds, not hours.",
+  keywords:
+    "DeDevs, NextJS, shadcn/ui, landing",
+  icons: {
+    icon: "/favicon.ico",
   },
-  twitter: {
+  manifest: "/site.webmanifest",
+  appleWebApp: {
+    title: "DeDevs | NextJS App",
+    statusBarStyle: "default",
+  },
+  openGraph: {
+    type: "website",
     title: "DeDevs | NextJS App",
     description: "Build Your Next App (+ shadcn/ui) in seconds, not hours.",
-    card: 'summary_large_image',
-    site: 'https://nextjs.dedevs.club',
+    url: defaultUrl,
+    siteName: "DeDevs | NextJS App",
+    images: [
+      {
+        url: `${defaultUrl}/opengraph-image.png`,
+        width: 1200,
+        height: 630,
+        alt: "DeDevs Logo"
+      }
+    ]
   },
-  icons: {
-    icon: '/favicon.svg',
-  },
-};
+  twitter: {
+    card: "summary_large_image",
+    title: "DeDevs | NextJS App",
+    description: "Build Your Next App (+ shadcn/ui) in seconds, not hours.",
+    images: [`${defaultUrl}/opengraph-image.png`],
+    creator: "@DeDevsClub"
+  }
+}
 
 export default function RootLayout({
   children,
