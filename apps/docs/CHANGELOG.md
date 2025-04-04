@@ -16,9 +16,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated README with comprehensive project structure and instructions
 - Fixed port number in development server (now running on port 3003)
 
-### Fixed
-- Updated .gitignore to include `.next` and `.source` directories
-
 ## [0.1.0] - 2025-04-04
 
 ### Added

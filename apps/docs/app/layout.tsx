@@ -1,106 +1,66 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import { ThemeProvider } from "@/components/theme-provider";
-import { ThemeToggle } from "@/components/theme-toggle";
+import { RootProvider } from 'fumadocs-ui/provider';
+import 'fumadocs-ui/style.css';
+import { Inter } from 'next/font/google';
+import type { ReactNode } from 'react';
+import type { Metadata } from 'next';
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({
+  subsets: ['latin'],
+});
 
+const defaultUrl = `https://docs.dedevs.club`
 export const metadata: Metadata = {
-  title: "DevDocs | NextJS",
-  description: "Documentation website built with Next.js and MDX",
-  generator: "create-dedevs-app",
-  keywords: ['DeDevs', 'Documentation', 'Guides', 'API Reference'],
-  openGraph: {
+  metadataBase: new URL(defaultUrl),
+  title: "DeDevs | Docs",
+  description:
+    "Documentation for DeDevs.",
+  keywords:
+    "DeDevs, Documentation, Docs",
+  icons: {
+    icon: "/favicon.ico",
+  },
+  manifest: "/site.webmanifest",
+  appleWebApp: {
     title: "DeDevs | Docs",
-    description: "Technical docs (+ guides) for DeDevs.",
-    type: 'website',
-    url: 'https://docs.dedevs.club',
-    siteName: 'DeDevs | Docs',
+    statusBarStyle: "default",
+  },
+  openGraph: {
+    type: "website",
+    title: "DeDevs | Docs",
+    description: "Documentation for DeDevs.",
+    url: defaultUrl,
+    siteName: "DeDevs | Docs",
+    images: [
+      {
+        url: `${defaultUrl}/opengraph-image.png`,
+        width: 1200,
+        height: 630,
+        alt: "DeDevs Logo"
+      }
+    ]
   },
   twitter: {
+    card: "summary_large_image",
     title: "DeDevs | Docs",
-    description: "Technical docs (+ guides) for DeDevs.",
-    card: 'summary_large_image',
-    site: 'DeDevs | Docs',
-  },
-  icons: {
-    icon: 'https://dedevs.club/favicon.ico',
-  },
-};
+    description: "Documentation for DeDevs.",
+    images: [`${defaultUrl}/opengraph-image.png`],
+    creator: "@DeDevsClub"
+  }
+}
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function Layout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <link rel="icon" href="https://dedevs.club/favicon.ico" />
-      </head>
-      <body className={inter.className}>
-        <ThemeProvider defaultTheme="system">
-          <div className="flex min-h-screen flex-col">
-            <header className="sticky top-0 z-40 border-b bg-background">
-              <div className="container flex h-16 items-center justify-between py-4">
-                <div className="flex items-center gap-6">
-                  <a href="/" className="flex items-center gap-2">
-                    <img 
-                      src="/logo/light.svg" 
-                      alt="Logo" 
-                      className="h-8 w-auto block dark:hidden" 
-                    />
-                    <img 
-                      src="/logo/dark.svg" 
-                      alt="Logo" 
-                      className="h-8 w-auto hidden dark:block" 
-                    />
-                    <span className="font-bold">DevDocs</span>
-                  </a>
-                </div>
-                <nav className="flex items-center gap-4">
-                  <ThemeToggle />
-                  <a 
-                    href="https://github.com/DeDevsClub" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="rounded-md border px-4 py-2 font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
-                  >
-                    GitHub
-                  </a>
-                </nav>
-              </div>
-            </header>
-            <main className="flex-1">{children}</main>
-            <footer className="border-t py-6 md:py-0">
-              <div className="container flex flex-col items-center justify-between gap-4 md:h-16 md:flex-row">
-                <p className="text-sm text-muted-foreground">
-                  &copy; {new Date().getFullYear()} DeDevsClub. All rights reserved.
-                </p>
-                <div className="flex items-center gap-4">
-                  <a 
-                    href="https://x.com/DeDevsClub" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-sm text-muted-foreground hover:underline"
-                  >
-                    X (Twitter)
-                  </a>
-                  <a 
-                    href="https://github.com/DeDevsClub" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-sm text-muted-foreground hover:underline"
-                  >
-                    GitHub
-                  </a>
-                </div>
-              </div>
-            </footer>
-          </div>
-        </ThemeProvider>
+    <html lang="en" className={inter.className} suppressHydrationWarning>
+      <body
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          minHeight: '100vh',
+        }}
+      >
+        <RootProvider>{children}</RootProvider>
       </body>
     </html>
   );
 }
+

@@ -1,75 +1,80 @@
-# Next.js Documentation App
+# Docs
 
-This documentation app is built with Next.js and supports MDX content. The app provides:
+This is a Next.js documentation application powered by [Fumadocs](https://fumadocs.vercel.app) and generated with [Create DeDevs App](https://github.com/DeDevsClub/create-dedevs-app).
 
-- Guide pages with MDX support
-- Navigation with sidebar
-- Dark/light mode support
-- API Reference pages
-- Custom MDX components
+## Getting Started
 
-## Directory Structure
+### Prerequisites
 
-```
-docs/
-├── app/                    # Next.js app directory
-│   ├── docs/               # Docs layout and pages
-│   │   └── layout.tsx      # Layout for docs section with sidebar
-│   ├── globals.css         # Global styles
-│   ├── layout.tsx          # Root layout
-│   └── page.tsx            # Homepage
-├── components/             # React components
-│   ├── mdx-content.tsx     # MDX rendering component
-│   └── sidebar-nav.tsx     # Sidebar navigation
-├── lib/                    # Utility functions
-│   └── mdx.ts              # MDX processing utilities
-├── public/                 # Static assets
-│   ├── images/             # Images used in docs
-│   ├── logo/               # Logo files
-│   └── favicon.svg         # Site favicon
-├── essentials/             # MDX content for essentials section
-├── api-reference/          # MDX content for API reference
-├── next.config.mjs         # Next.js configuration
-├── package.json            # Project dependencies
-├── postcss.config.mjs      # PostCSS configuration
-└── tailwind.config.ts      # Tailwind CSS configuration
-```
+- [Node.js](https://nodejs.org/) (v18 or newer)
+- [pnpm](https://pnpm.io/) package manager
 
-## Development
+### Installation
 
-To run the documentation site locally:
+This docs application is part of a monorepo. You can either install and run just the docs app or the entire project.
 
-1. Install dependencies:
+#### Option 1: Install and run only the docs app
 
 ```bash
+# Navigate to the docs directory
+cd apps/docs
+
+# Install dependencies
 pnpm install
+
+# Run the development server
+pnpm dev
 ```
 
-2. Start the development server:
+#### Option 2: Install and run the entire monorepo
 
 ```bash
-pnpm run dev
+# From the root directory
+pnpm apps:install  # Install all apps
+
+# Then run the docs app
+pnpm docs  # This runs the docs app via 'make docs'
 ```
 
-The site will be available at http://localhost:3004
+Open [http://localhost:3003](http://localhost:3003) with your browser to see the result.
 
-## Building for Production
+## Project Structure
 
-To build the documentation for production:
-
-```bash
-pnpm run build
+```
+apps/docs/
+├── app/                # Next.js app router
+│   ├── (home)/        # Home page routes
+│   ├── api/           # API routes, including search
+│   └── docs/          # Documentation pages
+├── content/           # Documentation content
+│   └── docs/          # MDX documentation files
+├── lib/               # Utility functions and configurations
+├── public/            # Static assets
+└── README.md          # This file
 ```
 
-To preview the production build:
+## Scripts
 
-```bash
-pnpm run start
-```
+- `pnpm dev` - Run the development server on port 3003
+- `pnpm build` - Build the application for production
+- `pnpm start` - Start the production server
+- `pnpm postinstall` - Run automatically after install to set up Fumadocs MDX
 
-## Customization
+## Monorepo Structure
 
-- Edit `app/layout.tsx` to update the site header and footer
-- Update `app/docs/layout.tsx` to modify the sidebar navigation
-- Style changes can be made in `app/globals.css` and `tailwind.config.ts`
-- MDX components can be customized in `components/mdx-content.tsx`
+This docs application is part of a larger monorepo that includes:
+
+- `apps/api` - Backend API
+- `apps/docs` - This documentation app
+- `apps/hashnode` - Hashnode blog integration
+- `apps/nextjs` - Main Next.js application
+- `apps/portfolio` - Portfolio website
+
+## Learn More
+
+To learn more about Next.js and Fumadocs, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial
+- [Fumadocs](https://fumadocs.vercel.app) - learn about Fumadocs documentation framework
+- [Create DeDevs App](https://github.com/DeDevsClub/create-dedevs-app) - learn about the Create DeDevs App CLI tool
