@@ -35,7 +35,16 @@ const config: NextConfig = {
   },
   async redirects() {
     return [
-      
+      {
+        source: '/docs',
+        destination: '/docs/section/page',
+        permanent: true,
+      },
+      {
+        source: '/docs/section',
+        destination: '/docs/section/page',
+        permanent: true,
+      }
     ];
   },
 };
