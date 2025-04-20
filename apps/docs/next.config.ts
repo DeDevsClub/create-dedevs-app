@@ -44,6 +44,11 @@ const config: NextConfig = {
         source: '/docs/section',
         destination: '/docs/section/page',
         permanent: true,
+      },
+      {
+        source: '/docs/openapi',
+        destination: '/docs/openapi/programs',
+        permanent: true,
       }
     ];
   },

@@ -27,7 +27,7 @@ export function AISearchTrigger(
         onClick={() => setOpen(true)}
         className={cn(
           buttonVariants({
-            variant: 'secondary',
+            color: 'secondary',
           }),
           'fixed bottom-4 right-4 z-10 gap-2 rounded-xl bg-fd-secondary/50 text-fd-secondary-foreground/80 shadow-lg backdrop-blur-lg md:bottom-8 md:right-8',
           props.className,

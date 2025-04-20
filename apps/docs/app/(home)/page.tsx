@@ -201,7 +201,7 @@ function Features() {
       >
         <Link
           href="/docs/headless/search/algolia"
-          className={cn(buttonVariants({ variant: 'outline', className: 'mt-4' }))}
+          className={cn(buttonVariants({ color: 'outline', className: 'mt-4' }))}
         >
           Learn More
         </Link>
