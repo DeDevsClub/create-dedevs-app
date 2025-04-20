@@ -18,8 +18,6 @@ import type { HTMLAttributes, ReactNode } from 'react';
 import { cn } from '@/lib/cn';
 import { buttonVariants } from '@/components/ui/button';
 import { CodeBlock } from '@/components/code-block';
-import { WhyInteractive } from './page.client';
-import { TypeTable } from 'fumadocs-ui/components/type-table';
 import Image from 'next/image';
 
 export default function Page() {
@@ -45,88 +43,9 @@ export default function Page() {
           </div>
           <Features />
           <Highlights />
-          <Why />
         </div>
       </main>
     </>
-  );
-}
-
-async function Why() {
-  return (
-    <div className="relative overflow-hidden border-x border-t px-8 py-12 md:py-16 md:min-h-[500px]">
-      <WhyInteractive
-        typeTable={
-          <TypeTable
-            type={{
-              name: {
-                type: 'string',
-                description: 'The name of player',
-                default: 'hello',
-              },
-              code: {
-                type: 'string',
-                description: <CodeBlock lang="ts" code='console.log("Hello World")' />,
-              },
-            }}
-          />
-        }
-        codeblockSearchRouter={
-          <CodeBlock
-            lang="ts"
-            code={`import { source } from '@/lib/source';
-import { createFromSource } from 'fumadocs-core/search/server';
- 
-export const { GET } = createFromSource(source);`}
-          />
-        }
-        codeblockTheme={
-          <CodeBlock
-            lang="css"
-            code={`@import 'tailwindcss';
-@import 'fumadocs-ui/css/neutral.css';
-@import 'fumadocs-ui/css/preset.css';
-
-@source '../node_modules/fumadocs-ui/dist/**/*.js';`}
-          />
-        }
-        codeblockInteractive={
-          <CodeBlock
-            lang="tsx"
-            code={`import { File, Folder, Files } from 'fumadocs-ui/components/files';
- 
-<Files>
-  <Folder name="app" defaultOpen>
-    <File name="layout.tsx" />
-    <File name="page.tsx" />
-    <File name="global.css" />
-  </Folder>
-  <File name="package.json" />
-</Files>`}
-          />
-        }
-        codeblockMdx={
-          <CodeBlock
-            lang="tsx"
-            code={`import { db } from '@/server/db';
-
-export function ProductTable() {
-  const products = db.getProducts()
-    
-  return (
-    <ul>
-      {products.map(product => <li key={product.key}>{product.name}</li>)}
-    </ul>
-  );
-}
-
-## Products
-
-<ProductTable />`}
-          />
-        }
-      />
-    </div>
   );
 }
 
@@ -167,9 +86,6 @@ function Search(): React.ReactElement {
 function Highlights(): React.ReactElement {
   return (
     <div className="grid grid-cols-1 border-r md:grid-cols-2 lg:grid-cols-3">
-      <div className="col-span-full flex flex-row items-start justify-center border-l border-t p-8 pb-2 text-center">
-        <MousePointer className="-ml-1 mt-8" />
-      </div>
       <Highlight icon={TimerIcon} heading="Light & Fast.">
         Less Javascript with React Server Component, and optimized images.
       </Highlight>
@@ -220,50 +136,18 @@ function Hero() {
   return (
     <div className="relative z-[2] flex flex-col border-x border-t bg-fd-card/80 px-6 pt-12 max-md:text-center md:px-12 md:pt-16 [.uwu_&]:hidden max-lg:overflow-hidden">
       <h1 className="mb-8 text-4xl font-medium md:hidden">Build Your Docs</h1>
-      <main
-      className="flex-1 flex flex-col items-center justify-center text-center"
-    >
-      <Image
-        src="/hero.png"
-        width={2400}
-        height={1800}
-        alt="DeDevs Hero"
-        className={`
+      <main className="flex-1 flex flex-col items-center justify-center text-center">
+        <Image
+          src="/hero.png"
+          width={2400}
+          height={1800}
+          alt="DeDevs Hero"
+          className={`
           mb-4 rounded-lg shadow-lg
           w-full h-full object-cover
         `}
-      />
-    </main>
-
-      <h1 className="mb-8 max-w-[600px] text-4xl font-medium max-md:hidden">
-        Build excellent documentation site with less effort
-      </h1>
-      <p className="mb-8 text-fd-muted-foreground md:max-w-[80%] md:text-xl">
-        Fumadocs is a beautiful documentation framework for Developers, flexible and performant,
-        with everything from Next.js.
-      </p>
-      <div className="inline-flex items-center gap-3 max-md:mx-auto">
-        <Link
-          href="/docs/ui"
-          className={cn(buttonVariants({ size: 'lg', className: 'rounded-full' }))}
-        >
-          Getting Started
-        </Link>
-        <a
-          href="https://stackblitz.com/~/github.com/fuma-nama/fumadocs-ui-template"
-          target="_blank"
-          rel="noreferrer noopener"
-          className={cn(
-            buttonVariants({
-              size: 'lg',
-              variant: 'outline',
-              className: 'rounded-full bg-fd-background',
-            })
-          )}
-        >
-          Open Demo
-        </a>
-      </div>
+        />
+      </main>
     </div>
   );
 }
