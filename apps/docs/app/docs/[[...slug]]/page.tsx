@@ -1,13 +1,24 @@
-import { source } from '@/lib/source';
+import { source } from "@/lib/source";
 import {
   DocsPage,
   DocsBody,
   DocsDescription,
   DocsTitle,
-} from '@/components/layouts/page';
-import { notFound } from 'next/navigation';
-import defaultMdxComponents, { createRelativeLink } from 'fumadocs-ui/mdx';
-import { Steps, Step } from '@/components/steps';
+} from "@/components/layouts/page";
+import { notFound } from "next/navigation";
+import defaultComponents, { createRelativeLink } from "fumadocs-ui/mdx";
+import { APIPage } from "fumadocs-openapi/ui";
+import type { MDXComponents } from "mdx/types";
+import { openapi } from "@/lib/source";
+import { markdownComponents } from "@/components/markdown";
+
+function getMDXComponents(components?: MDXComponents): MDXComponents {
+  return {
+    ...defaultComponents,
+    APIPage: (props) => <APIPage {...openapi.getAPIPageProps(props)} />,
+    ...components,
+  };
+}
 
 export default async function Page(props: {
   params: Promise<{ slug?: string[] }>;
@@ -24,14 +35,12 @@ export default async function Page(props: {
       <DocsDescription>{page.data.description}</DocsDescription>
       <DocsBody>
         <MDXContent
-          components={{
-            ...defaultMdxComponents,
+          components={getMDXComponents({
             // this allows you to link to other pages with relative file paths
             a: createRelativeLink(source, page),
             // you can add other MDX components here
-            Steps,
-            Step,
-          }}
+            ...markdownComponents,
+          })}
         />
       </DocsBody>
     </DocsPage>

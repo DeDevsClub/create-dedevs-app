@@ -1,0 +1,2782 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Rewards API",
+    "version": "1.0.0",
+    "description": "API for rewards on Morpho."
+  },
+  "tags": [
+    {
+      "name": "Programs",
+      "description": "Operations related to reward programs"
+    }
+  ],
+  "servers": [
+    {
+      "url": "https://rewards.morpho.org",
+      "description": "Production Environment"
+    }
+  ],
+  "components": {
+    "schemas": {
+      "GetProgramsQuery": {
+        "type": "object",
+        "properties": {
+          "assets": {
+            "type": "string",
+            "pattern": "^0x[a-fA-F0-9]{40}(,0x[a-fA-F0-9]{40})*$",
+            "description": "Comma-separated list of asset addresses"
+          },
+          "chains": {
+            "type": "string",
+            "pattern": "^[0-9]+(,[0-9]+)*$",
+            "description": "Comma-separated list of chain IDs"
+          },
+          "creators": {
+            "type": "string",
+            "pattern": "^0x[a-fA-F0-9]{40}(,0x[a-fA-F0-9]{40})*$",
+            "description": "Comma-separated list of creator addresses"
+          },
+          "markets": {
+            "type": "string",
+            "pattern": "^0x[a-fA-F0-9]{64}(,0x[a-fA-F0-9]{64})*$",
+            "description": "Comma-separated list of market IDs"
+          },
+          "vaults": {
+            "type": "string",
+            "pattern": "^0x[a-fA-F0-9]{40}(,0x[a-fA-F0-9]{40})*$",
+            "description": "Comma-separated list of vault addresses"
+          },
+          "funded": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "string",
+                "enum": ["true"]
+              },
+              {
+                "type": "string",
+                "enum": ["false"]
+              }
+            ],
+            "description": "Filter by funded status"
+          },
+          "active": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "string",
+                "enum": ["true"]
+              },
+              {
+                "type": "string",
+                "enum": ["false"]
+              }
+            ],
+            "description": "Filter by active status"
+          },
+          "active_after": {
+            "type": "string",
+            "description": "Filter programs active after timestamp"
+          },
+          "active_before": {
+            "type": "string",
+            "description": "Filter programs active before timestamp"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["market-reward", "vault-reward", "uniform-reward", "airdrop-reward"],
+            "description": "Filter by program type"
+          },
+          "sort": {
+            "type": "string",
+            "enum": ["registration_timestamp"],
+            "description": "Sort by registration timestamp"
+          }
+        }
+      },
+      "MarketRewardProgram": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["market-reward"]
+          },
+          "id": {
+            "type": "string",
+            "description": "Program ID",
+            "example": "market_reward_1"
+          },
+          "start": {
+            "type": "string",
+            "description": "BigInt value as string",
+            "example": "1000000000000000000"
+          },
+          "end": {
+            "type": "string",
+            "description": "BigInt value as string",
+            "example": "1000000000000000000"
+          },
+          "created_at": {
+            "type": "string",
+            "description": "BigInt value as string",
+            "example": "1000000000000000000"
+          },
+          "distributor": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "address": {
+                "type": "string",
+                "pattern": "^0x[a-fA-F0-9]{40}$",
+                "description": "Ethereum address",
+                "example": "0x1234567890123456789012345678901234567890"
+              },
+              "chain_id": {
+                "anyOf": [
+                  {
+                    "type": "integer",
+                    "enum": [1, 8453, 57073]
+                  },
+                  {
+                    "type": "string"
+                  }
+                ],
+                "description": "Chain ID (can be provided as a number or string)",
+                "example": 1
+              }
+            },
+            "required": ["id", "address", "chain_id"],
+            "description": "Distributor configuration"
+          },
+          "asset": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "address": {
+                "type": "string",
+                "pattern": "^0x[a-fA-F0-9]{40}$",
+                "description": "Ethereum address",
+                "example": "0x1234567890123456789012345678901234567890"
+              },
+              "chain_id": {
+                "anyOf": [
+                  {
+                    "type": "integer",
+                    "enum": [1, 8453, 57073]
+                  },
+                  {
+                    "type": "string"
+                  }
+                ],
+                "description": "Chain ID (can be provided as a number or string)",
+                "example": 1
+              }
+            },
+            "required": ["id", "address", "chain_id"],
+            "description": "Asset configuration"
+          },
+          "market_id": {
+            "type": "string",
+            "description": "Market ID",
+            "example": "market_1"
+          },
+          "supply_rate_per_year": {
+            "type": "string",
+            "description": "BigInt value as string",
+            "example": "1000000000000000000"
+          },
+          "borrow_rate_per_year": {
+            "type": "string",
+            "description": "BigInt value as string",
+            "example": "1000000000000000000"
+          },
+          "collateral_rate_per_year": {
+            "type": "string",
+            "description": "BigInt value as string",
+            "example": "1000000000000000000"
+          },
+          "chain_id": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "enum": [1, 8453, 57073]
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "Chain ID (can be provided as a number or string)",
+            "example": 1
+          },
+          "creator": {
+            "type": "string",
+            "pattern": "^0x[a-fA-F0-9]{40}$",
+            "description": "Ethereum address",
+            "example": "0x1234567890123456789012345678901234567890"
+          }
+        },
+        "required": [
+          "type",
+          "id",
+          "start",
+          "created_at",
+          "distributor",
+          "asset",
+          "market_id",
+          "supply_rate_per_year",
+          "borrow_rate_per_year",
+          "collateral_rate_per_year",
+          "chain_id",
+          "creator"
+        ]
+      },
+      "VaultRewardProgram": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["vault-reward"]
+          },
+          "id": {
+            "type": "string",
+            "description": "Program ID",
+            "example": "vault_reward_1"
+          },
+          "start": {
+            "type": "string",
+            "description": "BigInt value as string",
+            "example": "1000000000000000000"
+          },
+          "end": {
+            "type": "string",
+            "description": "BigInt value as string",
+            "example": "1000000000000000000"
+          },
+          "created_at": {
+            "type": "string",
+            "description": "BigInt value as string",
+            "example": "1000000000000000000"
+          },
+          "distributor": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "address": {
+                "type": "string",
+                "pattern": "^0x[a-fA-F0-9]{40}$",
+                "description": "Ethereum address",
+                "example": "0x1234567890123456789012345678901234567890"
+              },
+              "chain_id": {
+                "anyOf": [
+                  {
+                    "type": "integer",
+                    "enum": [1, 8453, 57073]
+                  },
+                  {
+                    "type": "string"
+                  }
+                ],
+                "description": "Chain ID (can be provided as a number or string)",
+                "example": 1
+              }
+            },
+            "required": ["id", "address", "chain_id"],
+            "description": "Distributor configuration"
+          },
+          "asset": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "address": {
+                "type": "string",
+                "pattern": "^0x[a-fA-F0-9]{40}$",
+                "description": "Ethereum address",
+                "example": "0x1234567890123456789012345678901234567890"
+              },
+              "chain_id": {
+                "anyOf": [
+                  {
+                    "type": "integer",
+                    "enum": [1, 8453, 57073]
+                  },
+                  {
+                    "type": "string"
+                  }
+                ],
+                "description": "Chain ID (can be provided as a number or string)",
+                "example": 1
+              }
+            },
+            "required": ["id", "address", "chain_id"],
+            "description": "Asset configuration"
+          },
+          "vault": {
+            "type": "string",
+            "pattern": "^0x[a-fA-F0-9]{40}$",
+            "description": "Ethereum address",
+            "example": "0x1234567890123456789012345678901234567890"
+          },
+          "rate_per_year": {
+            "type": "string",
+            "description": "BigInt value as string",
+            "example": "1000000000000000000"
+          },
+          "chain_id": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "enum": [1, 8453, 57073]
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "Chain ID (can be provided as a number or string)",
+            "example": 1
+          },
+          "creator": {
+            "type": "string",
+            "pattern": "^0x[a-fA-F0-9]{40}$",
+            "description": "Ethereum address",
+            "example": "0x1234567890123456789012345678901234567890"
+          }
+        },
+        "required": [
+          "type",
+          "id",
+          "start",
+          "end",
+          "created_at",
+          "distributor",
+          "asset",
+          "vault",
+          "rate_per_year",
+          "chain_id",
+          "creator"
+        ]
+      },
+      "AirdropRewardProgram": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["airdrop-reward"]
+          },
+          "id": {
+            "type": "string",
+            "description": "Program ID",
+            "example": "airdrop_reward_1"
+          },
+          "cid_v0": {
+            "type": "string",
+            "description": "IPFS CID v0",
+            "example": "QmHash..."
+          },
+          "created_at": {
+            "type": "string",
+            "description": "BigInt value as string",
+            "example": "1000000000000000000"
+          },
+          "distributor": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "address": {
+                "type": "string",
+                "pattern": "^0x[a-fA-F0-9]{40}$",
+                "description": "Ethereum address",
+                "example": "0x1234567890123456789012345678901234567890"
+              },
+              "chain_id": {
+                "anyOf": [
+                  {
+                    "type": "integer",
+                    "enum": [1, 8453, 57073]
+                  },
+                  {
+                    "type": "string"
+                  }
+                ],
+                "description": "Chain ID (can be provided as a number or string)",
+                "example": 1
+              }
+            },
+            "required": ["id", "address", "chain_id"],
+            "description": "Distributor configuration"
+          },
+          "asset": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "address": {
+                "type": "string",
+                "pattern": "^0x[a-fA-F0-9]{40}$",
+                "description": "Ethereum address",
+                "example": "0x1234567890123456789012345678901234567890"
+              },
+              "chain_id": {
+                "anyOf": [
+                  {
+                    "type": "integer",
+                    "enum": [1, 8453, 57073]
+                  },
+                  {
+                    "type": "string"
+                  }
+                ],
+                "description": "Chain ID (can be provided as a number or string)",
+                "example": 1
+              }
+            },
+            "required": ["id", "address", "chain_id"],
+            "description": "Asset configuration"
+          },
+          "chain_id": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "enum": [1, 8453, 57073]
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "Chain ID (can be provided as a number or string)",
+            "example": 1
+          },
+          "total_rewards": {
+            "type": "string",
+            "description": "BigInt value as string",
+            "example": "1000000000000000000"
+          },
+          "creator": {
+            "type": "string",
+            "pattern": "^0x[a-fA-F0-9]{40}$",
+            "description": "Ethereum address",
+            "example": "0x1234567890123456789012345678901234567890"
+          }
+        },
+        "required": [
+          "type",
+          "id",
+          "cid_v0",
+          "created_at",
+          "distributor",
+          "asset",
+          "chain_id",
+          "total_rewards",
+          "creator"
+        ]
+      },
+      "UniformRewardProgram": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["uniform-reward"]
+          },
+          "id": {
+            "type": "string",
+            "description": "Program ID",
+            "example": "uniform_reward_1"
+          },
+          "created_at": {
+            "type": "string",
+            "description": "BigInt value as string",
+            "example": "1000000000000000000"
+          },
+          "start": {
+            "type": "string",
+            "description": "BigInt value as string",
+            "example": "1000000000000000000"
+          },
+          "end": {
+            "anyOf": [
+              {
+                "type": "string",
+                "description": "BigInt value as string",
+                "example": "1000000000000000000"
+              },
+              {
+                "nullable": true
+              },
+              {
+                "nullable": true
+              }
+            ]
+          },
+          "distributor": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "address": {
+                "type": "string",
+                "pattern": "^0x[a-fA-F0-9]{40}$",
+                "description": "Ethereum address",
+                "example": "0x1234567890123456789012345678901234567890"
+              },
+              "chain_id": {
+                "anyOf": [
+                  {
+                    "type": "integer",
+                    "enum": [1, 8453, 57073]
+                  },
+                  {
+                    "type": "string"
+                  }
+                ],
+                "description": "Chain ID (can be provided as a number or string)",
+                "example": 1
+              }
+            },
+            "required": ["id", "address", "chain_id"],
+            "description": "Distributor configuration"
+          },
+          "asset": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "address": {
+                "type": "string",
+                "pattern": "^0x[a-fA-F0-9]{40}$",
+                "description": "Ethereum address",
+                "example": "0x1234567890123456789012345678901234567890"
+              },
+              "chain_id": {
+                "anyOf": [
+                  {
+                    "type": "integer",
+                    "enum": [1, 8453, 57073]
+                  },
+                  {
+                    "type": "string"
+                  }
+                ],
+                "description": "Chain ID (can be provided as a number or string)",
+                "example": 1
+              }
+            },
+            "required": ["id", "address", "chain_id"],
+            "description": "Asset configuration"
+          },
+          "chain_id": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "enum": [1, 8453, 57073]
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "Chain ID (can be provided as a number or string)",
+            "example": 1
+          },
+          "creator": {
+            "type": "string",
+            "pattern": "^0x[a-fA-F0-9]{40}$",
+            "description": "Ethereum address",
+            "example": "0x1234567890123456789012345678901234567890"
+          }
+        },
+        "required": [
+          "type",
+          "id",
+          "created_at",
+          "start",
+          "distributor",
+          "asset",
+          "chain_id",
+          "creator"
+        ]
+      },
+      "Program": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/MarketRewardProgram"
+          },
+          {
+            "$ref": "#/components/schemas/VaultRewardProgram"
+          },
+          {
+            "$ref": "#/components/schemas/AirdropRewardProgram"
+          },
+          {
+            "$ref": "#/components/schemas/UniformRewardProgram"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "market-reward": "#/components/schemas/MarketRewardProgram",
+            "vault-reward": "#/components/schemas/VaultRewardProgram",
+            "airdrop-reward": "#/components/schemas/AirdropRewardProgram",
+            "uniform-reward": "#/components/schemas/UniformRewardProgram"
+          }
+        }
+      },
+      "ProgramsResponse": {
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "description": "Response timestamp"
+          },
+          "pagination": {
+            "type": "object",
+            "properties": {
+              "per_page": {
+                "type": "number",
+                "description": "Number of items per page"
+              },
+              "page": {
+                "type": "number",
+                "description": "Current page number"
+              },
+              "total_pages": {
+                "type": "number",
+                "description": "Total number of pages"
+              },
+              "next": {
+                "type": "string",
+                "nullable": true,
+                "description": "Link to next page"
+              },
+              "prev": {
+                "type": "string",
+                "nullable": true,
+                "description": "Link to previous page"
+              }
+            },
+            "required": ["per_page", "page", "total_pages", "next", "prev"],
+            "description": "Pagination information"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Program"
+            },
+            "description": "List of programs"
+          }
+        },
+        "required": ["timestamp", "pagination", "data"]
+      },
+      "CreateProgramRequest": {
+        "type": "object",
+        "properties": {
+          "signature": {
+            "type": "string",
+            "description": "Signature from the program creator",
+            "example": "0x1234567890..."
+          },
+          "program_payload": {
+            "type": "object",
+            "properties": {
+              "program_type": {
+                "type": "string",
+                "enum": ["market-reward", "vault-reward", "airdrop-reward"],
+                "description": "Type of reward program",
+                "example": "market-reward"
+              },
+              "program": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "market_id": {
+                        "type": "string",
+                        "pattern": "^0x[a-fA-F0-9]{64}$",
+                        "description": "ID of the market",
+                        "example": "0x1234567890123456789012345678901234567890123456789012345678901234"
+                      },
+                      "start": {
+                        "type": "string",
+                        "pattern": "^\\d+$",
+                        "description": "Timestamp in seconds",
+                        "example": "1672531200"
+                      },
+                      "end": {
+                        "type": "string",
+                        "pattern": "^\\d+$",
+                        "description": "Timestamp in seconds",
+                        "example": "1672531200"
+                      },
+                      "funds_sender": {
+                        "type": "string",
+                        "pattern": "^0x[a-fA-F0-9]{40}$",
+                        "description": "Address that will send funds to the distributor",
+                        "example": "0x1234567890123456789012345678901234567890"
+                      },
+                      "target_chain_id": {
+                        "anyOf": [
+                          {
+                            "type": "integer",
+                            "enum": [1, 8453, 57073]
+                          },
+                          {
+                            "type": "string"
+                          }
+                        ],
+                        "description": "Target chain ID for the program",
+                        "example": 1
+                      },
+                      "distributor": {
+                        "type": "object",
+                        "properties": {
+                          "urd_address": {
+                            "type": "string",
+                            "pattern": "^0x[a-fA-F0-9]{40}$",
+                            "description": "URD contract address",
+                            "example": "0x1234567890123456789012345678901234567890"
+                          },
+                          "token_address": {
+                            "type": "string",
+                            "pattern": "^0x[a-fA-F0-9]{40}$",
+                            "description": "Reward token address",
+                            "example": "0x1234567890123456789012345678901234567890"
+                          },
+                          "chain_id": {
+                            "anyOf": [
+                              {
+                                "type": "integer",
+                                "enum": [1, 8453, 57073]
+                              },
+                              {
+                                "type": "string"
+                              }
+                            ],
+                            "description": "Chain ID where the distributor is deployed",
+                            "example": 1
+                          }
+                        },
+                        "required": ["urd_address", "token_address", "chain_id"],
+                        "description": "Distributor configuration"
+                      },
+                      "amount": {
+                        "type": "object",
+                        "properties": {
+                          "supply": {
+                            "type": "string",
+                            "pattern": "^\\d+$",
+                            "description": "Supply rewards amount",
+                            "example": "1000000000000000000"
+                          },
+                          "borrow": {
+                            "type": "string",
+                            "pattern": "^\\d+$",
+                            "description": "Borrow rewards amount",
+                            "example": "1000000000000000000"
+                          },
+                          "collateral": {
+                            "type": "string",
+                            "pattern": "^\\d+$",
+                            "description": "Collateral rewards amount",
+                            "example": "1000000000000000000"
+                          }
+                        },
+                        "required": ["supply", "borrow", "collateral"],
+                        "description": "Reward amounts for different positions"
+                      }
+                    },
+                    "required": [
+                      "market_id",
+                      "start",
+                      "end",
+                      "funds_sender",
+                      "target_chain_id",
+                      "distributor",
+                      "amount"
+                    ],
+                    "description": "Market reward program configuration"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "vault": {
+                        "type": "string",
+                        "pattern": "^0x[a-fA-F0-9]{40}$",
+                        "description": "Vault address",
+                        "example": "0x1234567890123456789012345678901234567890"
+                      },
+                      "start": {
+                        "type": "string",
+                        "pattern": "^\\d+$",
+                        "description": "Timestamp in seconds",
+                        "example": "1672531200"
+                      },
+                      "end": {
+                        "type": "string",
+                        "pattern": "^\\d+$",
+                        "description": "Timestamp in seconds",
+                        "example": "1672531200"
+                      },
+                      "funds_sender": {
+                        "type": "string",
+                        "pattern": "^0x[a-fA-F0-9]{40}$",
+                        "description": "Address that will send funds to the distributor",
+                        "example": "0x1234567890123456789012345678901234567890"
+                      },
+                      "target_chain_id": {
+                        "anyOf": [
+                          {
+                            "type": "integer",
+                            "enum": [1, 8453, 57073]
+                          },
+                          {
+                            "type": "string"
+                          }
+                        ],
+                        "description": "Target chain ID for the program",
+                        "example": 1
+                      },
+                      "distributor": {
+                        "type": "object",
+                        "properties": {
+                          "urd_address": {
+                            "type": "string",
+                            "pattern": "^0x[a-fA-F0-9]{40}$",
+                            "description": "URD contract address",
+                            "example": "0x1234567890123456789012345678901234567890"
+                          },
+                          "token_address": {
+                            "type": "string",
+                            "pattern": "^0x[a-fA-F0-9]{40}$",
+                            "description": "Reward token address",
+                            "example": "0x1234567890123456789012345678901234567890"
+                          },
+                          "chain_id": {
+                            "anyOf": [
+                              {
+                                "type": "integer",
+                                "enum": [1, 8453, 57073]
+                              },
+                              {
+                                "type": "string"
+                              }
+                            ],
+                            "description": "Chain ID where the distributor is deployed",
+                            "example": 1
+                          }
+                        },
+                        "required": ["urd_address", "token_address", "chain_id"],
+                        "description": "Distributor configuration"
+                      },
+                      "amount": {
+                        "type": "string",
+                        "pattern": "^\\d+$",
+                        "description": "Total reward amount",
+                        "example": "1000000000000000000"
+                      }
+                    },
+                    "required": [
+                      "vault",
+                      "start",
+                      "end",
+                      "funds_sender",
+                      "target_chain_id",
+                      "distributor",
+                      "amount"
+                    ],
+                    "description": "Vault reward program configuration"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "start": {
+                        "type": "string",
+                        "pattern": "^\\d+$",
+                        "description": "Timestamp in seconds",
+                        "example": "1672531200"
+                      },
+                      "end": {
+                        "type": "string",
+                        "pattern": "^\\d+$",
+                        "description": "Timestamp in seconds",
+                        "example": "1672531200"
+                      },
+                      "funds_sender": {
+                        "type": "string",
+                        "pattern": "^0x[a-fA-F0-9]{40}$",
+                        "description": "Address that will send funds to the distributor",
+                        "example": "0x1234567890123456789012345678901234567890"
+                      },
+                      "target_chain_id": {
+                        "anyOf": [
+                          {
+                            "type": "integer",
+                            "enum": [1, 8453, 57073]
+                          },
+                          {
+                            "type": "string"
+                          }
+                        ],
+                        "description": "Target chain ID for the program",
+                        "example": 1
+                      },
+                      "distributor": {
+                        "type": "object",
+                        "properties": {
+                          "urd_address": {
+                            "type": "string",
+                            "pattern": "^0x[a-fA-F0-9]{40}$",
+                            "description": "URD contract address",
+                            "example": "0x1234567890123456789012345678901234567890"
+                          },
+                          "token_address": {
+                            "type": "string",
+                            "pattern": "^0x[a-fA-F0-9]{40}$",
+                            "description": "Reward token address",
+                            "example": "0x1234567890123456789012345678901234567890"
+                          },
+                          "chain_id": {
+                            "anyOf": [
+                              {
+                                "type": "integer",
+                                "enum": [1, 8453, 57073]
+                              },
+                              {
+                                "type": "string"
+                              }
+                            ],
+                            "description": "Chain ID where the distributor is deployed",
+                            "example": 1
+                          }
+                        },
+                        "required": ["urd_address", "token_address", "chain_id"],
+                        "description": "Distributor configuration"
+                      },
+                      "recipients": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "string",
+                          "pattern": "^\\d+$"
+                        },
+                        "description": "Map of recipient addresses to reward amounts",
+                        "example": {
+                          "0x1234567890123456789012345678901234567890": "1000000000000000000"
+                        }
+                      },
+                      "amount": {
+                        "type": "string",
+                        "pattern": "^\\d+$",
+                        "description": "Total reward amount",
+                        "example": "1000000000000000000"
+                      }
+                    },
+                    "required": [
+                      "start",
+                      "end",
+                      "funds_sender",
+                      "target_chain_id",
+                      "distributor",
+                      "recipients",
+                      "amount"
+                    ],
+                    "description": "Airdrop reward program configuration"
+                  }
+                ],
+                "description": "Program configuration based on type"
+              }
+            },
+            "required": ["program_type", "program"],
+            "description": "Program payload containing type and configuration"
+          }
+        },
+        "required": ["signature", "program_payload"]
+      },
+      "CreateProgramResponse": {
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "description": "Response timestamp"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "program_id": {
+                "type": "string",
+                "description": "Program ID",
+                "example": "0xb5d4574dfc361117c8cf0be5850579ccf43ccdfd62429a55509939a01457659a"
+              }
+            },
+            "required": ["program_id"]
+          }
+        },
+        "required": ["timestamp", "data"]
+      },
+      "DeleteProgramParams": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^0x[a-fA-F0-9]{64}$",
+            "description": "Program ID to delete",
+            "example": "0x1234567890123456789012345678901234567890123456789012345678901234"
+          }
+        },
+        "required": ["id"]
+      },
+      "DeleteProgramBodySchema": {
+        "type": "object",
+        "properties": {
+          "signature": {
+            "type": "string",
+            "pattern": "^0x[a-fA-F0-9]{130,132}$",
+            "description": "Signature from program creator authorizing deletion",
+            "example": "0x1234567890..."
+          }
+        },
+        "required": ["signature"]
+      },
+      "DeleteProgramResponse": {
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "description": "Response timestamp"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "message": {
+                "type": "string",
+                "description": "Success message",
+                "example": "Program deleted successfully"
+              },
+              "program_id": {
+                "type": "string",
+                "description": "ID of the deleted program",
+                "example": "0x1234567890123456789012345678901234567890123456789012345678901234"
+              }
+            },
+            "required": ["message", "program_id"]
+          }
+        },
+        "required": ["timestamp", "data"]
+      },
+      "GetProgramWithIdParams": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^0x[a-fA-F0-9]{64}$",
+            "description": "Program ID",
+            "example": "0x1234567890123456789012345678901234567890123456789012345678901234"
+          }
+        },
+        "required": ["id"]
+      },
+      "GetProgramWithIdQuery": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "pattern": "^[0-9]{4}-[0-9]{1,2}-[0-9]{1,2}$",
+            "description": "Date to get program rates at, in format yyyy-mm-dd",
+            "example": "2023-01-01"
+          }
+        }
+      },
+      "ProgramStatsResponse": {
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "description": "Response timestamp"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "total_nb_of_programs": {
+                "type": "integer",
+                "minimum": 0,
+                "description": "Total number of programs",
+                "example": 367
+              }
+            },
+            "required": ["total_nb_of_programs"]
+          }
+        },
+        "required": ["timestamp", "data"]
+      },
+      "GetChunkedRewardsParams": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "pattern": "^[0-9]{4}-[0-9]{1,2}-[0-9]{1,2}$",
+            "description": "Date to get rewards for, in format yyyy-mm-dd",
+            "example": "2023-01-01"
+          }
+        },
+        "required": ["date"]
+      },
+      "GetChunkedRewardsQueryParams": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "string",
+            "description": "Page number",
+            "example": "1"
+          },
+          "per_page": {
+            "type": "string",
+            "description": "Number of items per page (max 10000)",
+            "example": "100"
+          }
+        }
+      },
+      "ChunkedReward": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the reward chunk"
+          },
+          "sender": {
+            "type": "string",
+            "description": "Sender of the reward"
+          },
+          "receiver": {
+            "type": "string",
+            "description": "Receiver of the reward"
+          },
+          "amount": {
+            "type": "string",
+            "description": "Amount of the reward"
+          },
+          "start": {
+            "type": "string",
+            "description": "Start timestamp of the reward"
+          },
+          "end": {
+            "type": "string",
+            "description": "End timestamp of the reward"
+          },
+          "asset_id": {
+            "type": "string",
+            "description": "Asset ID of the reward"
+          },
+          "distributor_id": {
+            "type": "string",
+            "description": "Distributor ID of the reward"
+          },
+          "program_id": {
+            "type": "string",
+            "description": "Program ID of the reward"
+          },
+          "namespace": {
+            "type": "string",
+            "enum": ["core", "redirection", "bridge"],
+            "description": "Namespace of the reward stream (core, redirection, bridge)"
+          }
+        },
+        "required": [
+          "id",
+          "sender",
+          "receiver",
+          "amount",
+          "start",
+          "end",
+          "asset_id",
+          "distributor_id",
+          "program_id",
+          "namespace"
+        ]
+      },
+      "ChunkedRewardsResponse": {
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "description": "Response timestamp"
+          },
+          "pagination": {
+            "type": "object",
+            "properties": {
+              "per_page": {
+                "type": "number",
+                "description": "Number of items per page"
+              },
+              "page": {
+                "type": "number",
+                "description": "Current page number"
+              },
+              "total_pages": {
+                "type": "number",
+                "description": "Total number of pages"
+              },
+              "next": {
+                "type": "string",
+                "nullable": true,
+                "description": "Link to next page"
+              },
+              "prev": {
+                "type": "string",
+                "nullable": true,
+                "description": "Link to previous page"
+              }
+            },
+            "required": ["per_page", "page", "total_pages", "next", "prev"],
+            "description": "Pagination information"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChunkedReward"
+            },
+            "description": "List of chunked rewards"
+          }
+        },
+        "required": ["timestamp", "pagination", "data"]
+      },
+      "RedirectionConfiguration": {
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "string",
+            "pattern": "^0x[a-fA-F0-9]{40}$",
+            "description": "Source address",
+            "example": "0x1234567890123456789012345678901234567890"
+          },
+          "to": {
+            "type": "string",
+            "pattern": "^0x[a-fA-F0-9]{40}$",
+            "description": "Destination address",
+            "example": "0xabCDEF1234567890ABcDEF1234567890aBCDeF12"
+          },
+          "timestamp": {
+            "type": "integer",
+            "minimum": 0,
+            "exclusiveMinimum": true,
+            "description": "Timestamp in seconds when the redirection should start",
+            "example": 1750000000
+          },
+          "note": {
+            "type": "string",
+            "description": "Optional note about this redirection",
+            "example": "Community redirection"
+          }
+        },
+        "required": ["from", "to", "timestamp"]
+      },
+      "CreateRedirectionRequest": {
+        "type": "object",
+        "properties": {
+          "redirection_configuration": {
+            "$ref": "#/components/schemas/RedirectionConfiguration"
+          },
+          "signature": {
+            "type": "string",
+            "pattern": "^0x[a-fA-F0-9]{130,132}$",
+            "description": "EIP-712 signature from the owner of the 'from' address",
+            "example": "0x1234..."
+          },
+          "chain_id": {
+            "type": "integer",
+            "minimum": 0,
+            "exclusiveMinimum": true,
+            "description": "Chain ID for the signature domain",
+            "example": 1
+          }
+        },
+        "required": ["redirection_configuration", "signature", "chain_id"]
+      },
+      "RedirectionResponse": {
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "description": "Response timestamp"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "from": {
+                "type": "string",
+                "pattern": "^0x[a-fA-F0-9]{40}$",
+                "description": "Source address",
+                "example": "0x1234567890123456789012345678901234567890"
+              },
+              "to": {
+                "type": "string",
+                "pattern": "^0x[a-fA-F0-9]{40}$",
+                "description": "Destination address",
+                "example": "0xabCDEF1234567890ABcDEF1234567890aBCDeF12"
+              },
+              "timestamp": {
+                "type": "string",
+                "description": "Timestamp when the redirection starts",
+                "example": "1750000000"
+              }
+            },
+            "required": ["from", "to", "timestamp"]
+          }
+        },
+        "required": ["timestamp", "data"]
+      },
+      "BlacklistEntry": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "type": "string",
+            "pattern": "^0x[a-fA-F0-9]{40}$",
+            "description": "Ethereum address to blacklist",
+            "example": "0x1234567890123456789012345678901234567890"
+          },
+          "timestamp": {
+            "type": "integer",
+            "minimum": 0,
+            "exclusiveMinimum": true,
+            "description": "Unix timestamp in seconds when the blacklist entry expires",
+            "example": 1750000000
+          },
+          "note": {
+            "type": "string",
+            "description": "Optional note about why the address was blacklisted",
+            "example": "Suspicious activity detected"
+          }
+        },
+        "required": ["user", "timestamp"]
+      },
+      "CreateBlacklistEntryRequest": {
+        "type": "object",
+        "properties": {
+          "blacklist_entry": {
+            "$ref": "#/components/schemas/BlacklistEntry"
+          },
+          "signature": {
+            "type": "string",
+            "pattern": "^0x[a-fA-F0-9]{130,132}$",
+            "description": "EIP-712 signature from admin wallet",
+            "example": "0x1234..."
+          },
+          "chain_id": {
+            "type": "integer",
+            "minimum": 0,
+            "exclusiveMinimum": true,
+            "description": "Chain ID for signature verification",
+            "example": 1
+          }
+        },
+        "required": ["blacklist_entry", "signature", "chain_id"]
+      },
+      "BlacklistResponse": {
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "description": "Response timestamp"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "user": {
+                "type": "string",
+                "pattern": "^0x[a-fA-F0-9]{40}$",
+                "description": "The blacklisted Ethereum address",
+                "example": "0x1234567890123456789012345678901234567890"
+              },
+              "timestamp": {
+                "type": "string",
+                "description": "The expiration timestamp as a string",
+                "example": "1750000000"
+              }
+            },
+            "required": ["user", "timestamp"]
+          }
+        },
+        "required": ["timestamp", "data"]
+      },
+      "ForwarderConfig": {
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "description": "Timestamp when the forwarder config was set",
+            "example": "1750000000"
+          },
+          "networks": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "distributor": {
+                  "type": "string",
+                  "pattern": "^0x[a-fA-F0-9]{40}$",
+                  "description": "Distributor address",
+                  "example": "0x330eefa8a787552DC5cAd3C3cA644844B1E61Ddb"
+                },
+                "chain_id": {
+                  "type": "number",
+                  "description": "Chain identifier",
+                  "example": 1
+                },
+                "addresses": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "pattern": "^0x[a-fA-F0-9]{40}$",
+                    "description": "Ethereum address",
+                    "example": "0x1234567890123456789012345678901234567890"
+                  },
+                  "description": "List of addresses for the network",
+                  "example": ["0x1234567890123456789012345678901234567890"]
+                }
+              },
+              "required": ["distributor", "chain_id", "addresses"]
+            },
+            "description": "List of network configurations"
+          },
+          "ignored_forwarders": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "user": {
+                  "type": "string",
+                  "pattern": "^0x[a-fA-F0-9]{40}$",
+                  "description": "Ignored forwarder user address",
+                  "example": "0x334F5d28a71432f8fc21C7B2B6F5dBbcD8B32A7b"
+                },
+                "date": {
+                  "type": "string",
+                  "description": "Date starting from which the forwarder is ignored",
+                  "example": "2025-04-11"
+                },
+                "chain_id": {
+                  "type": "number",
+                  "description": "Chain identifier for the ignored forwarder",
+                  "example": 1
+                }
+              },
+              "required": ["user", "date", "chain_id"]
+            },
+            "description": "Optional list of forwarders to be ignored after a defined date"
+          },
+          "redirections": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "from": {
+                  "type": "string",
+                  "pattern": "^0x[a-fA-F0-9]{40}$",
+                  "description": "Source address in redirection",
+                  "example": "0xE0e83f21D5B6Da61c9cF75d3b89FBCacfbFde327"
+                },
+                "to": {
+                  "type": "string",
+                  "pattern": "^0x[a-fA-F0-9]{40}$",
+                  "description": "Destination address in redirection",
+                  "example": "0x4786fba4d836B73A39746f778Db1B298B8a62131"
+                },
+                "timestamp": {
+                  "type": "string",
+                  "description": "Timestamp when redirection starts",
+                  "example": "1733529600"
+                }
+              },
+              "required": ["from", "to", "timestamp"]
+            },
+            "description": "Optional list of redirections for the forwarder"
+          },
+          "exclusions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "user": {
+                  "type": "string",
+                  "pattern": "^0x[a-fA-F0-9]{40}$",
+                  "description": "User address to exclude",
+                  "example": "0x1234567890123456789012345678901234567890"
+                },
+                "distributor": {
+                  "type": "string",
+                  "pattern": "^0x[a-fA-F0-9]{40}$",
+                  "description": "Distributor from which the user is excluded",
+                  "example": "0x330eefa8a787552DC5cAd3C3cA644844B1E61Ddb"
+                },
+                "keep": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "asset": {
+                        "type": "string",
+                        "description": "Asset identifier to keep",
+                        "example": "0xAsset"
+                      },
+                      "amount": {
+                        "type": "string",
+                        "description": "Amount to keep",
+                        "example": "1000000000000000000"
+                      }
+                    },
+                    "required": ["asset", "amount"]
+                  },
+                  "description": "Optional list of assets to keep"
+                }
+              },
+              "required": ["user", "distributor"]
+            },
+            "description": "Optional list of exclusions for the forwarder"
+          },
+          "blacklist": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "user": {
+                  "type": "string",
+                  "pattern": "^0x[a-fA-F0-9]{40}$",
+                  "description": "Blacklisted user address",
+                  "example": "0x1234567890123456789012345678901234567890"
+                },
+                "timestamp": {
+                  "type": "string",
+                  "description": "Expiration timestamp for the blacklist entry",
+                  "example": "1750000000"
+                }
+              },
+              "required": ["user"]
+            },
+            "description": "Optional list of blacklisted users for the forwarder"
+          }
+        },
+        "required": ["timestamp", "networks"]
+      },
+      "RewardConfigurationsResponse": {
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "description": "Response timestamp"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "redirections": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "from": {
+                      "type": "string",
+                      "pattern": "^0x[a-fA-F0-9]{40}$",
+                      "description": "Source address",
+                      "example": "0xE0e83f21D5B6Da61c9cF75d3b89FBCacfbFde327"
+                    },
+                    "to": {
+                      "type": "string",
+                      "pattern": "^0x[a-fA-F0-9]{40}$",
+                      "description": "Destination address",
+                      "example": "0x4786fba4d836B73A39746f778Db1B298B8a62131"
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "description": "When the redirection starts",
+                      "example": "1733529600"
+                    }
+                  },
+                  "required": ["from", "to", "timestamp"]
+                },
+                "description": "List of active redirections"
+              },
+              "blacklist": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "user": {
+                      "type": "string",
+                      "pattern": "^0x[a-fA-F0-9]{40}$",
+                      "description": "Blacklisted Ethereum address",
+                      "example": "0x1234567890123456789012345678901234567890"
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "description": "When the blacklist entry expires",
+                      "example": "1750000000"
+                    }
+                  },
+                  "required": ["user", "timestamp"]
+                },
+                "description": "List of blacklisted addresses"
+              },
+              "exclusions": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "user": {
+                      "type": "string",
+                      "pattern": "^0x[a-fA-F0-9]{40}$",
+                      "description": "Excluded address",
+                      "example": "0x1234567890123456789012345678901234567890"
+                    },
+                    "distributor": {
+                      "type": "string",
+                      "description": "Where the address should be excluded from",
+                      "example": "0x330eefa8a787552DC5cAd3C3cA644844B1E61Ddb"
+                    }
+                  },
+                  "required": ["user", "distributor"]
+                },
+                "description": "List of excluded addresses"
+              },
+              "forwarders": {
+                "type": "object",
+                "properties": {
+                  "kiln": {
+                    "$ref": "#/components/schemas/ForwarderConfig"
+                  }
+                },
+                "description": "Forwarders configuration"
+              }
+            },
+            "required": ["redirections", "blacklist", "exclusions"]
+          }
+        },
+        "required": ["timestamp", "data"]
+      },
+      "RewardStatEntry": {
+        "type": "object",
+        "properties": {
+          "asset": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Unique identifier for the asset",
+                "example": "0x7f39c581f595b53c5cb19bd0b3f8da6c935e2ca0-1"
+              },
+              "address": {
+                "type": "string",
+                "pattern": "^0x[a-fA-F0-9]{40}$",
+                "description": "Token contract address",
+                "example": "0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0"
+              },
+              "chain_id": {
+                "anyOf": [
+                  {
+                    "type": "integer",
+                    "enum": [1, 8453, 57073]
+                  },
+                  {
+                    "type": "string"
+                  }
+                ],
+                "description": "Chain ID where the asset exists",
+                "example": 1
+              }
+            },
+            "required": ["id", "address", "chain_id"],
+            "description": "Asset information"
+          },
+          "total_distributed": {
+            "type": "string",
+            "description": "Total amount distributed in base units",
+            "example": "179308083645443191673"
+          }
+        },
+        "required": ["asset", "total_distributed"]
+      },
+      "RewardStatsResponse": {
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "description": "Response timestamp"
+          },
+          "pagination": {
+            "type": "object",
+            "properties": {
+              "per_page": {
+                "type": "number",
+                "description": "Number of items per page"
+              },
+              "page": {
+                "type": "number",
+                "description": "Current page number"
+              },
+              "total_pages": {
+                "type": "number",
+                "description": "Total number of pages"
+              },
+              "next": {
+                "type": "string",
+                "nullable": true,
+                "description": "Link to next page"
+              },
+              "prev": {
+                "type": "string",
+                "nullable": true,
+                "description": "Link to previous page"
+              }
+            },
+            "required": ["per_page", "page", "total_pages", "next", "prev"],
+            "description": "Pagination information"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RewardStatEntry"
+            },
+            "description": "List of reward statistics by asset"
+          }
+        },
+        "required": ["timestamp", "pagination", "data"]
+      },
+      "GetUserRewardsParams": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "type": "string",
+            "pattern": "^0x[a-fA-F0-9]{40}$",
+            "description": "Ethereum address of the user",
+            "example": "0x1234567890123456789012345678901234567890"
+          }
+        },
+        "required": ["user"]
+      },
+      "GetUserRewardsQuery": {
+        "type": "object",
+        "properties": {
+          "chain_id": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "enum": [1, 8453, 57073]
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "Chain ID to filter rewards by",
+            "example": 1
+          },
+          "trusted": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "string",
+                "enum": ["true", "false"]
+              }
+            ],
+            "description": "Whether to fetch only trusted rewards",
+            "example": true
+          },
+          "noCache": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "string",
+                "pattern": "^\\d+$"
+              }
+            ],
+            "description": "Cache buster parameter",
+            "example": 1617304859
+          }
+        }
+      },
+      "RewardAmount": {
+        "type": "object",
+        "nullable": true,
+        "properties": {
+          "total": {
+            "type": "string",
+            "description": "Total reward amount",
+            "example": "6793675556293949553"
+          },
+          "claimable_now": {
+            "type": "string",
+            "description": "Amount claimable now",
+            "example": "0"
+          },
+          "claimable_next": {
+            "type": "string",
+            "description": "Amount claimable in the next period",
+            "example": "6793675556293949553"
+          },
+          "claimed": {
+            "type": "string",
+            "description": "Amount already claimed",
+            "example": "0"
+          }
+        },
+        "required": ["total", "claimable_now", "claimable_next", "claimed"],
+        "description": "Supply rewards information"
+      },
+      "UserReward": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "type": "string",
+            "pattern": "^0x[a-fA-F0-9]{40}$",
+            "description": "User address",
+            "example": "0xBEEF01735c132Ada46AA9aA4c54623cAA92A64CB"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["market-reward", "vault-reward", "uniform-reward", "airdrop-reward"],
+            "description": "Type of reward",
+            "example": "market-reward"
+          },
+          "asset": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "address": {
+                "type": "string",
+                "pattern": "^0x[a-fA-F0-9]{40}$",
+                "description": "Ethereum address",
+                "example": "0x1234567890123456789012345678901234567890"
+              },
+              "chain_id": {
+                "anyOf": [
+                  {
+                    "type": "integer",
+                    "enum": [1, 8453, 57073]
+                  },
+                  {
+                    "type": "string"
+                  }
+                ],
+                "description": "Chain ID (can be provided as a number or string)",
+                "example": 1
+              }
+            },
+            "required": ["id", "address", "chain_id"],
+            "description": "Asset configuration"
+          },
+          "program": {
+            "$ref": "#/components/schemas/Program"
+          },
+          "for_supply": {
+            "$ref": "#/components/schemas/RewardAmount"
+          },
+          "for_borrow": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RewardAmount"
+              },
+              {
+                "description": "Borrow rewards information"
+              }
+            ]
+          },
+          "for_collateral": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RewardAmount"
+              },
+              {
+                "description": "Collateral rewards information"
+              }
+            ]
+          }
+        },
+        "required": ["user", "type", "asset", "program"]
+      },
+      "UserRewardsResponse": {
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "description": "Response timestamp"
+          },
+          "pagination": {
+            "type": "object",
+            "properties": {
+              "per_page": {
+                "type": "number",
+                "description": "Number of items per page"
+              },
+              "page": {
+                "type": "number",
+                "description": "Current page number"
+              },
+              "total_pages": {
+                "type": "number",
+                "description": "Total number of pages"
+              },
+              "next": {
+                "type": "string",
+                "nullable": true,
+                "description": "Link to next page"
+              },
+              "prev": {
+                "type": "string",
+                "nullable": true,
+                "description": "Link to previous page"
+              }
+            },
+            "required": ["per_page", "page", "total_pages", "next", "prev"],
+            "description": "Pagination information"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserReward"
+            },
+            "description": "List of user rewards"
+          }
+        },
+        "required": ["timestamp", "pagination", "data"]
+      },
+      "GetUserDistributionsParams": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "type": "string",
+            "pattern": "^0x[a-fA-F0-9]{40}$",
+            "description": "Ethereum address of the user",
+            "example": "0x1234567890123456789012345678901234567890"
+          }
+        },
+        "required": ["user"]
+      },
+      "GetUserDistributionsQuery": {
+        "type": "object",
+        "properties": {
+          "chain_id": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "enum": [1, 8453, 57073]
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "Chain ID to filter distributions by",
+            "example": 1
+          },
+          "trusted": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "string",
+                "enum": ["true", "false"]
+              }
+            ],
+            "description": "Whether to fetch only trusted distributions",
+            "example": true
+          },
+          "noCache": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "string",
+                "pattern": "^\\d+$"
+              }
+            ],
+            "description": "Cache buster parameter",
+            "example": 1617304859
+          }
+        }
+      },
+      "UserDistribution": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "type": "string",
+            "pattern": "^0x[a-fA-F0-9]{40}$",
+            "description": "User address",
+            "example": "0x1234567890123456789012345678901234567890"
+          },
+          "asset": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "address": {
+                "type": "string",
+                "pattern": "^0x[a-fA-F0-9]{40}$",
+                "description": "Ethereum address",
+                "example": "0x1234567890123456789012345678901234567890"
+              },
+              "chain_id": {
+                "anyOf": [
+                  {
+                    "type": "integer",
+                    "enum": [1, 8453, 57073]
+                  },
+                  {
+                    "type": "string"
+                  }
+                ],
+                "description": "Chain ID (can be provided as a number or string)",
+                "example": 1
+              }
+            },
+            "required": ["id", "address", "chain_id"],
+            "description": "Asset configuration"
+          },
+          "distributor": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "address": {
+                "type": "string",
+                "pattern": "^0x[a-fA-F0-9]{40}$",
+                "description": "Ethereum address",
+                "example": "0x1234567890123456789012345678901234567890"
+              },
+              "chain_id": {
+                "anyOf": [
+                  {
+                    "type": "integer",
+                    "enum": [1, 8453, 57073]
+                  },
+                  {
+                    "type": "string"
+                  }
+                ],
+                "description": "Chain ID (can be provided as a number or string)",
+                "example": 1
+              }
+            },
+            "required": ["id", "address", "chain_id"],
+            "description": "Distributor configuration"
+          },
+          "claimable": {
+            "type": "string",
+            "description": "BigInt value as string",
+            "example": "1000000000000000000"
+          },
+          "proof": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Proof list",
+            "example": ["0x1234", "0x5678"]
+          },
+          "txData": {
+            "type": "string",
+            "description": "Transaction data",
+            "example": "0x1234"
+          }
+        },
+        "required": ["user", "asset", "distributor", "claimable", "proof", "txData"]
+      },
+      "UserDistributionsResponse": {
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "description": "Response timestamp"
+          },
+          "pagination": {
+            "type": "object",
+            "properties": {
+              "per_page": {
+                "type": "number",
+                "description": "Number of items per page"
+              },
+              "page": {
+                "type": "number",
+                "description": "Current page number"
+              },
+              "total_pages": {
+                "type": "number",
+                "description": "Total number of pages"
+              },
+              "next": {
+                "type": "string",
+                "nullable": true,
+                "description": "Link to next page"
+              },
+              "prev": {
+                "type": "string",
+                "nullable": true,
+                "description": "Link to previous page"
+              }
+            },
+            "required": ["per_page", "page", "total_pages", "next", "prev"],
+            "description": "Pagination information"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserDistribution"
+            },
+            "description": "List of user distributions"
+          }
+        },
+        "required": ["timestamp", "pagination", "data"]
+      },
+      "GetUserBalancesTimeseriesParams": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "type": "string",
+            "pattern": "^0x[a-fA-F0-9]{40}$",
+            "description": "Ethereum address of the user",
+            "example": "0x1234567890123456789012345678901234567890"
+          }
+        },
+        "required": ["user"]
+      },
+      "GetUserBalancesTimeseriesQuery": {
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "string",
+            "pattern": "^[0-9]{4}-[0-9]{1,2}-[0-9]{1,2}$",
+            "description": "Start date for the time series in yyyy-mm-dd format",
+            "example": "2023-01-01"
+          },
+          "to": {
+            "type": "string",
+            "description": "End date for the time series in yyyy-mm-dd format",
+            "example": "2023-04-04"
+          },
+          "interval": {
+            "type": "string",
+            "enum": ["hour", "day"],
+            "default": "day",
+            "description": "Time interval for data points",
+            "example": "day"
+          },
+          "chain_id": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "enum": [1, 8453, 57073]
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "Chain ID to filter balances by",
+            "example": 1
+          }
+        }
+      },
+      "BalanceDataPoint": {
+        "type": "object",
+        "properties": {
+          "asset": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "address": {
+                "type": "string",
+                "pattern": "^0x[a-fA-F0-9]{40}$",
+                "description": "Ethereum address",
+                "example": "0x1234567890123456789012345678901234567890"
+              },
+              "chain_id": {
+                "anyOf": [
+                  {
+                    "type": "integer",
+                    "enum": [1, 8453, 57073]
+                  },
+                  {
+                    "type": "string"
+                  }
+                ],
+                "description": "Chain ID (can be provided as a number or string)",
+                "example": 1
+              }
+            },
+            "required": ["id", "address", "chain_id"],
+            "description": "Asset configuration"
+          },
+          "timeseries": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "amount": {
+                  "type": "string",
+                  "description": "Balance amount in base units",
+                  "example": "1000000000000000000"
+                },
+                "timestamp": {
+                  "type": "number",
+                  "description": "Timestamp of the balance snapshot",
+                  "example": 1743638400
+                }
+              },
+              "required": ["amount", "timestamp"]
+            },
+            "description": "Time series of user balance data points"
+          }
+        },
+        "required": ["asset", "timeseries"]
+      },
+      "UserBalancesTimeseriesResponse": {
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "description": "Response timestamp"
+          },
+          "pagination": {
+            "type": "object",
+            "properties": {
+              "per_page": {
+                "type": "number",
+                "description": "Number of items per page"
+              },
+              "page": {
+                "type": "number",
+                "description": "Current page number"
+              },
+              "total_pages": {
+                "type": "number",
+                "description": "Total number of pages"
+              },
+              "next": {
+                "type": "string",
+                "nullable": true,
+                "description": "Link to next page"
+              },
+              "prev": {
+                "type": "string",
+                "nullable": true,
+                "description": "Link to previous page"
+              }
+            },
+            "required": ["per_page", "page", "total_pages", "next", "prev"],
+            "description": "Pagination information"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BalanceDataPoint"
+            },
+            "description": "Time series of user balance data points"
+          }
+        },
+        "required": ["timestamp", "pagination", "data"]
+      },
+      "DistributorStat": {
+        "type": "object",
+        "properties": {
+          "distributor": {
+            "type": "string",
+            "pattern": "^0x[a-fA-F0-9]{40}$",
+            "description": "Distributor contract address",
+            "example": "0x2EfD4625d0c149EbADf118EC5446c6de24d916A4"
+          },
+          "asset": {
+            "type": "string",
+            "pattern": "^0x[a-fA-F0-9]{40}$",
+            "description": "Asset contract address",
+            "example": "0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0"
+          },
+          "chain_id": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "enum": [1, 8453, 57073]
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "Chain ID of the distributor and asset",
+            "example": 1
+          },
+          "total_distributed": {
+            "type": "string",
+            "description": "Total amount distributed in base units",
+            "example": "176308083645443191689"
+          }
+        },
+        "required": ["distributor", "asset", "chain_id", "total_distributed"]
+      },
+      "DistributorStatsResponse": {
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "description": "Response timestamp"
+          },
+          "pagination": {
+            "type": "object",
+            "properties": {
+              "per_page": {
+                "type": "number",
+                "description": "Number of items per page"
+              },
+              "page": {
+                "type": "number",
+                "description": "Current page number"
+              },
+              "total_pages": {
+                "type": "number",
+                "description": "Total number of pages"
+              },
+              "next": {
+                "type": "string",
+                "nullable": true,
+                "description": "Link to next page"
+              },
+              "prev": {
+                "type": "string",
+                "nullable": true,
+                "description": "Link to previous page"
+              }
+            },
+            "required": ["per_page", "page", "total_pages", "next", "prev"],
+            "description": "Pagination information"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DistributorStat"
+            },
+            "description": "List of distributor statistics"
+          }
+        },
+        "required": ["timestamp", "pagination", "data"]
+      },
+      "GetWalletBalanceParams": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "pattern": "^0x[a-fA-F0-9]{40}$",
+            "description": "Wallet address",
+            "example": "0x1234567890123456789012345678901234567890"
+          }
+        },
+        "required": ["address"]
+      },
+      "WalletBalance": {
+        "type": "object",
+        "properties": {
+          "token_address": {
+            "type": "string",
+            "pattern": "^0x[a-fA-F0-9]{40}$",
+            "description": "Ethereum address",
+            "example": "0x1234567890123456789012345678901234567890"
+          },
+          "chain_id": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "enum": [1, 8453, 57073]
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "Chain ID (can be provided as a number or string)",
+            "example": 1
+          },
+          "distributor_address": {
+            "type": "string",
+            "pattern": "^0x[a-fA-F0-9]{40}$",
+            "description": "Ethereum address",
+            "example": "0x1234567890123456789012345678901234567890"
+          },
+          "available": {
+            "type": "string",
+            "description": "BigInt value as string",
+            "example": "1000000000000000000"
+          },
+          "spent": {
+            "type": "string",
+            "description": "BigInt value as string",
+            "example": "1000000000000000000"
+          },
+          "total": {
+            "type": "string",
+            "description": "BigInt value as string",
+            "example": "1000000000000000000"
+          }
+        },
+        "required": [
+          "token_address",
+          "chain_id",
+          "distributor_address",
+          "available",
+          "spent",
+          "total"
+        ]
+      },
+      "WalletBalanceResponse": {
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "description": "Response timestamp"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "address": {
+                "type": "string",
+                "pattern": "^0x[a-fA-F0-9]{40}$",
+                "description": "Ethereum address",
+                "example": "0x1234567890123456789012345678901234567890"
+              },
+              "balances": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/WalletBalance"
+                },
+                "description": "List of token balances"
+              }
+            },
+            "required": ["address", "balances"]
+          }
+        },
+        "required": ["timestamp", "data"]
+      },
+      "SubmitTransactionRequest": {
+        "type": "object",
+        "properties": {
+          "tx_hash": {
+            "type": "string",
+            "pattern": "^0x[a-fA-F0-9]{64}$",
+            "description": "Transaction hash",
+            "example": "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef"
+          },
+          "chain_id": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "enum": [1, 8453, 57073]
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "Chain ID where the transaction was submitted",
+            "example": 1
+          }
+        },
+        "required": ["tx_hash", "chain_id"]
+      },
+      "TransferEvent": {
+        "type": "object",
+        "properties": {
+          "token_address": {
+            "type": "string",
+            "pattern": "^0x[a-fA-F0-9]{40}$",
+            "description": "Token address",
+            "example": "0x6B175474E89094C44Da98b954EedeAC495271d0F"
+          },
+          "amount": {
+            "type": "string",
+            "description": "Transfer amount",
+            "example": "1000000000000000000"
+          },
+          "from": {
+            "type": "string",
+            "pattern": "^0x[a-fA-F0-9]{40}$",
+            "description": "Sender address",
+            "example": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+          },
+          "to": {
+            "type": "string",
+            "pattern": "^0x[a-fA-F0-9]{40}$",
+            "description": "Recipient address (distributor)",
+            "example": "0x5400dBb270c956E8985184335A1C62AcA6Ce1333"
+          }
+        },
+        "required": ["token_address", "amount", "from", "to"]
+      },
+      "TransactionResponse": {
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "description": "Response timestamp"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "tx_hash": {
+                "type": "string",
+                "description": "Transaction hash",
+                "example": "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef"
+              },
+              "chain_id": {
+                "anyOf": [
+                  {
+                    "type": "integer",
+                    "enum": [1, 8453, 57073]
+                  },
+                  {
+                    "type": "string"
+                  }
+                ],
+                "description": "Chain ID (can be provided as a number or string)",
+                "example": 1
+              },
+              "transfers": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/TransferEvent"
+                },
+                "description": "Transfers"
+              }
+            },
+            "required": ["tx_hash", "chain_id", "transfers"],
+            "description": "Transaction information"
+          }
+        },
+        "required": ["timestamp", "data"]
+      }
+    },
+    "parameters": {}
+  },
+  "paths": {
+    "/v1/programs": {
+      "get": {
+        "title": "Programs",
+        "summary": "Get reward programs",
+        "tags": ["Programs"],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "pattern": "^0x[a-fA-F0-9]{40}(,0x[a-fA-F0-9]{40})*$",
+              "description": "Comma-separated list of asset addresses"
+            },
+            "required": false,
+            "name": "assets",
+            "in": "query",
+            "example": ""
+          },
+          {
+            "schema": {
+              "type": "string",
+              "pattern": "^[0-9]+(,[0-9]+)*$",
+              "description": "Comma-separated list of chain IDs"
+            },
+            "required": false,
+            "name": "chains",
+            "in": "query",
+            "example": ""
+          },
+          {
+            "schema": {
+              "type": "string",
+              "pattern": "^0x[a-fA-F0-9]{40}(,0x[a-fA-F0-9]{40})*$",
+              "description": "Comma-separated list of creator addresses"
+            },
+            "required": false,
+            "name": "creators",
+            "in": "query",
+            "example": ""
+          },
+          {
+            "schema": {
+              "type": "string",
+              "pattern": "^0x[a-fA-F0-9]{64}(,0x[a-fA-F0-9]{64})*$",
+              "description": "Comma-separated list of market IDs"
+            },
+            "required": false,
+            "name": "markets",
+            "in": "query",
+            "example": ""
+          },
+          {
+            "schema": {
+              "type": "string",
+              "pattern": "^0x[a-fA-F0-9]{40}(,0x[a-fA-F0-9]{40})*$",
+              "description": "Comma-separated list of vault addresses"
+            },
+            "required": false,
+            "name": "vaults",
+            "in": "query",
+            "example": ""
+          },
+          {
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "string",
+                  "enum": ["true"]
+                },
+                {
+                  "type": "string",
+                  "enum": ["false"]
+                }
+              ],
+              "description": "Filter by funded status"
+            },
+            "required": false,
+            "name": "funded",
+            "in": "query",
+            "example": ""
+          },
+          {
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "string",
+                  "enum": ["true"]
+                },
+                {
+                  "type": "string",
+                  "enum": ["false"]
+                }
+              ],
+              "description": "Filter by active status"
+            },
+            "required": false,
+            "name": "active",
+            "in": "query",
+            "example": ""
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Filter programs active after timestamp"
+            },
+            "required": false,
+            "name": "active_after",
+            "in": "query",
+            "example": ""
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Filter programs active before timestamp"
+            },
+            "required": false,
+            "name": "active_before",
+            "in": "query",
+            "example": ""
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": ["market-reward", "vault-reward", "uniform-reward", "airdrop-reward"],
+              "description": "Filter by program type"
+            },
+            "required": false,
+            "name": "type",
+            "in": "query",
+            "example": ""
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": ["registration_timestamp"],
+              "description": "Sort by registration timestamp"
+            },
+            "required": false,
+            "name": "sort",
+            "in": "query",
+            "example": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProgramsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "description": "Error message",
+                      "example": "Invalid query parameters"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "code": {
+                            "type": "string",
+                            "description": "Error code",
+                            "example": "invalid_type"
+                          },
+                          "message": {
+                            "type": "string",
+                            "description": "Error message",
+                            "example": "Expected string, received number"
+                          },
+                          "path": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            },
+                            "description": "Path to the invalid field",
+                            "example": ["chains"]
+                          }
+                        },
+                        "required": ["code", "message", "path"]
+                      },
+                      "description": "Validation error details"
+                    }
+                  },
+                  "required": ["error", "details"]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

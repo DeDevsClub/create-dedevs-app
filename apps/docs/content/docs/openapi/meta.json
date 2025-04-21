@@ -1,0 +1,19 @@
+{
+  "title": "OpenAPI",
+  "description": "Morpho API.",
+  "root": true,
+  "icon": "Rocket",
+  "_openapi": {
+    "method": "GET",
+    "route": "/v1/programs",
+    "toc": [],
+    "structuredData": {
+      "headings": [],
+      "contents": [
+        {
+          "content": "Morpho API documentation."
+        }
+      ]
+    }
+  }
+}

@@ -131,7 +131,7 @@ export function Header({
         )}
         {slot(
           themeSwitch,
-          <ThemeToggle className="max-lg:hidden" mode={themeSwitch?.mode} />,
+          <ThemeToggle className="max-lg:hidden" mode={'light-dark'} />,
         )}
         {i18n ? (
           <LanguageToggle className="max-lg:hidden">
@@ -173,7 +173,7 @@ export function Header({
                   <ChevronDown className="size-3 text-fd-muted-foreground" />
                 </LanguageToggle>
               ) : null}
-              {slot(themeSwitch, <ThemeToggle mode={themeSwitch?.mode} />)}
+              {slot(themeSwitch, <ThemeToggle mode={'light-dark'} />)}
             </div>
           </MenuContent>
         </Menu>

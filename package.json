@@ -10,11 +10,9 @@
   "scripts": {
     "lint": "eslint .",
     "start": "node index.js",
-
     "apps:install": "make install",
     "apps:build": "make build",
     "apps:dev": "make dev",
-
     "api": "make api",
     "docs": "make docs",
     "hashnode": "make hashnode",
@@ -23,6 +21,7 @@
   },
   "dependencies": {
     "@babel/core": "^7.26.10",
+    "clsx": "^2.1.1",
     "inquirer": "^12.5.0",
     "typescript": "^5.8.2"
   },

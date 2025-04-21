@@ -1,0 +1,9 @@
+{
+  "title": "Components",
+  "description": "DeDocs components.",
+  "root": true,
+  "icon": "Book",
+  "_source": {
+    "pages": ["cards", "steps"]
+  }
+}

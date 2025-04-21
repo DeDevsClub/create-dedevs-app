@@ -191,7 +191,7 @@ export function DocsLayout({
                 themeSwitch,
                 <ThemeToggle
                   className="md:hidden"
-                  mode={themeSwitch?.mode ?? 'light-dark-system'}
+                  mode={'light-dark'}
                 />,
               )}
               {sidebarFooter}
@@ -331,7 +331,7 @@ function DocsNavbar({
             themeSwitch,
             <ThemeToggle
               className="ms-2 max-md:hidden"
-              mode={themeSwitch?.mode ?? 'light-dark-system'}
+              mode={'light-dark'}
             />,
           )}
           {sidebarCollapsible && navMode === 'top' ? (

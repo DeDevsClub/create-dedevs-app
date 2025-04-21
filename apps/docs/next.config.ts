@@ -42,19 +42,19 @@ const config: NextConfig = {
     return [
       {
         source: '/docs',
-        destination: '/docs/section/page',
-        permanent: true,
-      },
-      {
-        source: '/docs/section',
-        destination: '/docs/section/page',
+        destination: '/docs/components/cards',
         permanent: true,
       },
       {
         source: '/docs/components',
         destination: '/docs/components/cards',
         permanent: true,
-      }
+      },
+      {
+        source: '/docs/openapi',
+        destination: '/docs/openapi/programs',
+        permanent: true,
+      },
     ];
   },
 };

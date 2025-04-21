@@ -26,7 +26,12 @@ export const baseOptions: BaseLayoutProps = {
   links: [
     {
       text: 'Documentation',
-      url: '/docs',
+      url: '/docs/components/cards',
+      active: 'nested-url',
+    },
+    {
+      text: 'OpenAPI',
+      url: '/docs/openapi',
       active: 'nested-url',
     },
   ],
