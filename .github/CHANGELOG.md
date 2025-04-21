@@ -16,12 +16,19 @@
 
 ### Changed
 - Updated `devCommand` to use `yarn dev` instead of `yarn run dev` in [index.js](cci:7://file:///Users/buns/Documents/GitHub/DeDevsClub/create-dedevs-app/index.js:0:0-0:0).
+- Refactored and simplified the `apps/docs` project.
+- Updated dependencies across various apps.
 
 ### Added
 - Added `dev:docs` script to `package.json` for easier documentation development.
+- Initial setup of the `create-dedevs-app` CLI.
 
 ### Fixed
 - Resolved `EAGAIN` error by adjusting the command execution in [index.js](cci:7://file:///Users/buns/Documents/GitHub/DeDevsClub/create-dedevs-app/index.js:0:0-0:0).
+- Addressed various build and type errors in `apps/docs`.
+
+### Removed
+- Deleted several components and files related to OpenAPI, AI chat, themes, and specific sections within `apps/docs`.
 
 ## [v0.1.1] - 2025-03-27
 
