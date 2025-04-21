@@ -52,7 +52,12 @@ const config: NextConfig = {
       },
       {
         source: '/docs/openapi',
-        destination: '/docs/openapi/programs',
+        destination: '/docs/openapi/defillama/tvl/chains',
+        permanent: true,
+      },
+      {
+        source: '/docs/openapi/defillama',
+        destination: '/docs/openapi/defillama/tvl/chains',
         permanent: true,
       },
     ];

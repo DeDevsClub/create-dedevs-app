@@ -1,0 +1,6 @@
+{
+  "title": "TVL",
+  "description": "Retrieve TVL data",
+  "root": false,
+  "icon": "Wallet"
+}

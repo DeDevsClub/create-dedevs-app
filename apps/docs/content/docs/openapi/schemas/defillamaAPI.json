@@ -1,0 +1,60 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "Docs for defillama's open API\n\nNeed higher rate limits or priority support? We offer a premium plan for 300$/mo. To get it, go to https://defillama.com/pro-api\n",
+    "version": "1.0.0-oas3",
+    "title": "DefiLlama API"
+  },
+  "tags": [
+    {
+      "name": "TVL",
+      "description": "Retrieve TVL data"
+    },
+    {
+      "name": "coins",
+      "description": "General blockchain data used by defillama and open-sourced"
+    }
+  ],
+  "servers": [
+    {
+      "url": "https://api.llama.fi"
+    }
+  ],
+  "paths": {
+    "/tvl/{protocol}": {
+      "get": {
+        "tags": ["TVL"],
+        "summary": "Simplified endpoint to get current TVL of a protocol",
+        "description": "Simplified endpoint that only returns a number, the current TVL of a protocol",
+        "parameters": [
+          {
+            "name": "protocol",
+            "in": "path",
+            "required": true,
+            "description": "protocol slug",
+            "schema": {
+              "type": "string",
+              "example": "morpho"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/v2/chains": {
+      "get": {
+        "tags": ["TVL"],
+        "summary": "Get current TVL of all chains",
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
+    }
+  }
+}
