@@ -1,5 +1,21 @@
 # Changelog
 
+## [v0.1.4] - 2025-04-21
+
+### Changed
+- Refactored `Bento` component styling and structure in `apps/docs` ([bento.tsx](cci:7://file:///Users/buns/Documents/GitHub/DeDevsClub/create-dedevs-app/apps/docs/components/bento.tsx:0:0-0:0)).
+- Updated `HomePage` layout and content in `apps/docs` ([page.tsx](cci:7://file:///Users/buns/Documents/GitHub/DeDevsClub/create-dedevs-app/apps/docs/app/(home)/page.tsx:0:0-0:0)).
+- Reverted usage of standard `fumadocs-ui/layout` back to custom `HomeLayout` in `apps/docs` ([layout.tsx](cci:7://file:///Users/buns/Documents/GitHub/DeDevsClub/create-dedevs-app/apps/docs/app/(home)/layout.tsx:0:0-0:0)).
+
+### Fixed
+- Resolved build errors related to deleted `protocols.mdx` by adding `defillama/meta.json` in `apps/docs`.
+- Addressed module resolution errors for `fumadocs-ui` imports in `apps/docs`.
+
+### Removed
+- Deleted unused header/navigation components (`site-header`, `nav-mobile`, `main-nav`) and `hooks.ts` from `apps/docs`.
+- Removed `colSpan` prop from `Bento` component interface in `apps/docs`.
+- Removed `META_THEME_COLORS` constant from `utils.ts` in `apps/docs`.
+
 ## [v0.1.3] - 2025-03-27
 
 ### Added
