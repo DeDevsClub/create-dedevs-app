@@ -9,6 +9,7 @@ const inter = Inter({
 });
 
 const defaultUrl = `https://docs.dedevs.club`
+
 export const metadata: Metadata = {
   metadataBase: new URL(defaultUrl),
   title: "DeDevs | Docs",
