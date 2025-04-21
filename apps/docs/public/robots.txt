@@ -1,6 +1,0 @@
-User-agent: *
-Allow: /
-
-Host: https://docs.dedevs.club
-
-Sitemap: https://docs.dedevs.club/sitemap.xml
