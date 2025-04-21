@@ -20,7 +20,6 @@ const itemVariants = cva(
 const full = [
   ['light', Sun] as const,
   ['dark', Moon] as const,
-  ['system', Airplay] as const,
 ];
 
 export function ThemeToggle({
@@ -28,7 +27,7 @@ export function ThemeToggle({
   mode = 'light-dark',
   ...props
 }: HTMLAttributes<HTMLElement> & {
-  mode?: 'light-dark' | 'light-dark-system';
+  mode?: 'light-dark'
 }) {
   const { setTheme, theme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
@@ -41,7 +40,6 @@ export function ThemeToggle({
     'inline-flex items-center rounded-full border p-1',
     className,
   );
-
   if (mode === 'light-dark') {
     const value = mounted ? resolvedTheme : null;
 
@@ -54,8 +52,6 @@ export function ThemeToggle({
         {...props}
       >
         {full.map(([key, Icon]) => {
-          if (key === 'system') return;
-
           return (
             <Icon
               key={key}

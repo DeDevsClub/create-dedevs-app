@@ -1,4 +1,5 @@
-'use client';
+'use client'
+
 import { ChevronsUpDown } from 'lucide-react';
 import { type HTMLAttributes, type ReactNode, useMemo, useState } from 'react';
 import Link from 'fumadocs-core/link';
