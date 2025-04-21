@@ -23,6 +23,7 @@ const config: NextConfig = {
     'oxc-transform',
     'twoslash',
     'shiki',
+    'fumadocs-ui',
   ],
   images: {
     remotePatterns: [
@@ -35,11 +36,20 @@ const config: NextConfig = {
   },
   async redirects() {
     return [
-      
+      {
+        source: '/docs/ui/blocks/layout',
+        destination: '/docs/ui/layouts/docs',
+        permanent: true,
+      },
+      {
+        source: '/docs/ui/blocks/:path*',
+        destination: '/docs/ui/layouts/:path*',
+        permanent: true,
+      },
     ];
   },
 };
 
 const withMDX = createMDX();
-// @ts-ignore
+
 export default withAnalyzer(withMDX(config));
