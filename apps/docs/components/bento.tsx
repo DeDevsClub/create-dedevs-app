@@ -36,9 +36,6 @@ interface GridItem {
                   "hover:-translate-y-0.5 will-change-transform",
                   "max-w-screen-7xl",
                   {
-                    "shadow-[0_2px_12px_rgba(0,0,0,0.03)] -translate-y-0.5": item.hasPersistentHover,
-                  },
-                  {
                     "bg-[#000000]": item.bgColor === "primary",
                     "bg-[#adfa1d]": item.bgColor === "secondary",
                   },
@@ -60,6 +57,7 @@ interface GridItem {
                   <div className="flex items-center justify-between w-full">
                     <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-black/5 dark:bg-white/10 group-hover:bg-linear-to-br transition-all duration-300">
                       {item.icon}
+                    
                     </div>
                     <span
                       className={cn(
