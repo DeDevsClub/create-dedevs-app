@@ -34,15 +34,7 @@ interface GridItem {
                   "border border-gray-100/80 dark:border-white/10 bg-white dark:bg-black",
                   "hover:shadow-[0_2px_12px_rgba(0,0,0,0.03)]",
                   "hover:-translate-y-0.5 will-change-transform",
-                  "max-w-screen-7xl",
-                  {
-                    "bg-[#000000]": item.bgColor === "primary",
-                    "bg-[#adfa1d]": item.bgColor === "secondary",
-                  },
-                  {
-                    "text-[#adfa1d]": item.color === "primary",
-                    "text-[#000000]": item.color === "secondary",
-                  },
+                  "max-w-screen-7xl"
                 )}
               >
                 <div
